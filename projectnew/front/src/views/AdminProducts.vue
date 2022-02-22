@@ -8,7 +8,8 @@
       v-model="dialog1"
       persistent
       @click="resetForm"
-      max-width="500"
+      max-width="600"
+      hide-overlay="false"
     >
       <template v-slot:activator="{ on, attrs }">
         <v-btn color="primary" dark v-bind="attrs" v-on="on" width="200px">
@@ -18,11 +19,6 @@
       <v-card>
         <v-form
           ref="form"
-          label="商品名稱"
-          label-for="input-name"
-          description="必填欄位"
-          invalid-feedback="商品名稱必填"
-          :state="state.name"
         >
           <v-text-field
             label="商品名稱"
@@ -31,17 +27,13 @@
             required
             placeholder="請輸入商品名稱"
             :state="state.name"
+            outlined
           >
           </v-text-field>
         </v-form>
 
         <v-form
           ref="form"
-          label="商品價格"
-          label-for="input-price"
-          description="必填欄位"
-          invalid-feedback="價格必須是 0 元以上"
-          :state="state.price"
         >
           <v-text-field
             v-model.number="form.price"
@@ -50,33 +42,26 @@
             required
             placeholder="請輸入商品價格"
             :state="state.price"
+            outlined
           >
           </v-text-field>
         </v-form>
 
         <v-form
           ref="form"
-          label="商品分類"
-          label-for="input-category"
-          description="必填欄位"
-          invalid-feedback="分類必填"
-          :state="state.category"
         >
           <v-select
             v-model="form.category"
             required
             :items="categories"
             :state="state.category"
+            outlined
           >
           </v-select>
         </v-form>
 
         <v-form
           ref="form"
-          label="商品說明"
-          label-for="input-description"
-          invalid-feedback="說明必填"
-          :state="state.description"
         >
           <v-textarea
             v-model="form.description"
@@ -85,6 +70,7 @@
             rows="3"
             max-rows="6"
             placeholder="請輸入商品說明"
+            color="teal"
           >
           </v-textarea>
         </v-form>
@@ -101,8 +87,9 @@
           bottom-text="點選或拖拽圖片以修改"
           hover-text="點選或拖拽圖片以修改"
           placeholder="點選或拖拽選擇圖片"
-          :max-size="1024"
+          :max-size="1000"
           exceed-size-text="檔案大小不能超過"
+          width="500px"
         />
 
         <v-card-actions>
@@ -122,6 +109,7 @@
       </v-card>
     </v-dialog>
     <!-- table -->
+    <v-container width="70%">
     <v-data-table
       ref="table"
       :headers="headers"
@@ -134,15 +122,15 @@
       </template>
       <template v-slot:top>
         <v-toolbar flat>
-          <v-toolbar-title>My CRUD</v-toolbar-title>
+          <v-toolbar-title>請編輯商品</v-toolbar-title>
           <v-divider class="mx-4" inset vertical></v-divider>
           <v-spacer></v-spacer>
           <v-dialog v-model="dialog" max-width="500px">
-            <template v-slot:activator="{ on, attrs }">
+            <!-- <template v-slot:activator="{ on, attrs }">
               <v-btn color="primary" dark class="mb-2" v-bind="attrs" v-on="on">
                 New Item
               </v-btn>
-            </template>
+            </template> -->
             <v-card>
               <v-card-title>
                 <span class="text-h5">{{ formTitle }}</span>
@@ -224,6 +212,7 @@
         <v-btn color="primary" @click="initialize"> Reset </v-btn>
       </template>
     </v-data-table>
+    </v-container>
     <!-- <v-simple-table>
     <template v-slot:default>
       <thead>
@@ -295,7 +284,6 @@ export default {
         { text: 'Calories', value: 'price' },
         { text: 'Fat (g)', value: 'category' },
         { text: 'Carbs (g)', value: 'imag' },
-        { text: 'Protein (g)', value: 'protein' },
         { text: 'Actions', value: 'actions', sortable: false }
       ],
       editedIndex: -1,
@@ -346,7 +334,6 @@ export default {
 
   methods: {
     async submitModal () {
-      console.log('ASD')
       if (!this.state.name || !this.state.price || !this.state.category) {
         return
       }
@@ -358,7 +345,6 @@ export default {
           fd.append(key, this.form[key])
         }
       }
-      console.log('7776')
 
       try {
         if (this.form._id.length === 0) {
@@ -384,9 +370,18 @@ export default {
             image: data.result.image
           }
           this.$refs.table.refresh()
-          console.log('7776')
         }
-        this.$bvModal.hide('modal-product')
+        this.modalSubmitting = false
+        this.form = {
+          name: '',
+          price: 0,
+          description: '',
+          image: null,
+          sell: false,
+          category: '',
+          _id: '',
+          index: ''
+        }
       } catch (error) {
         this.$swal({
           icon: 'error',
@@ -394,25 +389,13 @@ export default {
           text: error.response.data.message
         })
       }
-      this.modalSubmitting = false
     },
-    resetForm (event) {
-      console.log('8888')
-      if (this.modalSubmitting) {
-        event.preventDefault()
-        return
-      }
-      this.form = {
-        name: '',
-        price: 0,
-        description: '',
-        image: null,
-        sell: false,
-        category: '',
-        _id: '',
-        index: ''
-      }
-    },
+    // resetForm (event) {
+    //   console.log('8888')
+    //   if (this.modalSubmitting) {
+    //     event.preventDefault()
+    //   }
+    // },
     // initialize () {
     //   this.desserts = [
     //     {
@@ -488,9 +471,18 @@ export default {
     //   ]
     // },
     async editItem (item) {
-      this.editedIndex = this.products.indexOf(item)
-      this.editedItem = Object.assign({}, item)
-      this.dialog = true
+      // this.editedIndex = this.products.indexOf(item)
+      // console.log(this.products.indexOf(item))
+      // console.log(item)
+      // this.form.name = this.products[this.editedIndex].name
+      // this.dialog1 = true
+    },
+    closeDelete () {
+      this.dialogDelete = false
+      this.$nextTick(() => {
+        this.editedItem = Object.assign({}, this.defaultItem)
+        this.editedIndex = -1
+      })
     },
     deleteItem (item) {
       this.editedIndex = this.products.indexOf(item)
@@ -499,13 +491,14 @@ export default {
     },
     async deleteItemConfirm () {
       this.products.splice(this.editedIndex, 1)
-      // this.closeDelete()
-      if (this.editedIndex > -1) {
-        Object.assign(this.products[this.editedIndex], this.editedItem)
-      }
+      this.closeDelete()
       try {
         await this.api.delete(
-          '/products/' + this.products[this.editedIndex]._id
+          '/products/' + this.products[this.editedIndex]._id, {
+            headers: {
+              authorization: 'Bearer ' + this.user.token
+            }
+          }
         )
       } catch (error) {
         console.log(error)
