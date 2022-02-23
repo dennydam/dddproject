@@ -4,6 +4,7 @@ import mongoose from 'mongoose'
 import cors from 'cors'
 import usersRouter from './routes/users.js'
 import productsRouter from './routes/products.js'
+import products2Router from './routes/products2.js'
 
 mongoose.connect(process.env.DB_URL, () => {
   console.log('MongoDB Connected')
@@ -32,6 +33,7 @@ app.use((_, req, res, next) => {
 
 app.use('/users', usersRouter)
 app.use('/products', productsRouter)
+app.use('/products2', products2Router)
 
 app.all('*', (req, res) => {
   console.log('333')

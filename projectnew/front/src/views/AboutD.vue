@@ -161,7 +161,7 @@
                   md="6"
                   lg="3"
                   xl="3"
-                  v-for="product in products"
+                  v-for="product in products2"
                   :key="product._id"
                 >
                   <v-card max-width="250">
@@ -238,6 +238,7 @@ export default {
   data () {
     return {
       show: false,
+      products2: [],
       products: [],
       tab: null,
       items: [
@@ -340,6 +341,16 @@ export default {
     try {
       const { data } = await this.api.get('/products')
       this.products = data.result
+    } catch (error) {
+      this.$swal({
+        icon: 'error',
+        title: '錯誤',
+        text: '商品取得失敗'
+      })
+    }
+    try {
+      const { data } = await this.api.get('/products2')
+      this.products2 = data.result
     } catch (error) {
       this.$swal({
         icon: 'error',

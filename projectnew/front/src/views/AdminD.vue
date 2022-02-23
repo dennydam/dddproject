@@ -10,8 +10,8 @@
           </v-list>
 
           <v-list>
-            <v-btn class="pa-2" block color="primary" dark to="/admin/products">
-              商品管理
+            <v-btn class="pa-2" block color="primary" dark to="/admin/orders">
+              飲食管理
             </v-btn>
           </v-list>
 

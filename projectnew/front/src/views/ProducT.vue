@@ -1,4 +1,5 @@
 <template>
+<v-main>
   <v-container mt-15>
     <div id="section01">
       <v-row>
@@ -35,7 +36,8 @@
         </v-col>
       </v-row>
     </div>
-    <v-footer dark padless>
+  </v-container>
+     <v-footer class="mt-14" dark padless>
       <v-card
         color="primary"
         flat
@@ -73,12 +75,20 @@
         </v-card-text>
       </v-card>
     </v-footer>
-  </v-container>
+  </v-main>
+
 </template>
 <script>
 export default {
   data () {
     return {
+      icons: [
+        'mdi-facebook',
+        'mdi-twitter',
+        'mdi-linkedin',
+        'mdi-instagram'
+
+      ],
       name: '',
       price: 0,
       description: '',
@@ -121,3 +131,8 @@ export default {
   }
 }
 </script>
+<style>
+.v-main{
+      padding: 123px 0px 0px
+}
+</style>
