@@ -1,28 +1,78 @@
 <template>
-<v-container>
-  <div id="section01">
-      <div class="content1 mt-10 "
-       align="center"
-      justify="center" >
-     <iframe width="560" height="315" src="https://www.youtube.com/embed/3zE5rIdQn38" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-      </div>
-      <div class="worktext">
-        <h1>Sow nothing reap nothing</h1>
-      </div>
-      <v-form
-          ref="form"
-        >
-          <v-text-field
-            v-model.number='quantity'
-            type="number"
-            required
-            :state='quantityState'
-             min='0'
-          >
-          </v-text-field>
-          <v-btn @click="addCart">加入購物車</v-btn>
-        </v-form>
+  <v-container mt-15>
+    <div id="section01">
+      <v-row>
+        <v-col cols="6" class="content1 mt-10" align="center" justify="center">
+          <iframe
+            width="560"
+            height="315"
+            :src="video"
+            title="YouTube video player"
+            frameborder="0"
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+            allowfullscreen
+          ></iframe>
+        </v-col>
+        <v-col cols="6" class="worktext">
+          <h1>訓練說明</h1>
+          <v-card>
+            <h1>{{ description }}</h1>
+          </v-card>
+        </v-col>
+        <v-col cols="6">
+          <v-form ref="form">
+            <v-text-field
+              v-model.number="quantity"
+              type="number"
+              required
+              :state="quantityState"
+              min="0"
+            >
+            </v-text-field>
+            <v-btn class="mr-10" @click="addCart">加入訓練菜單</v-btn>
+            <v-btn @click="addCart">回去訓練頁</v-btn>
+          </v-form>
+        </v-col>
+      </v-row>
     </div>
+    <v-footer dark padless>
+      <v-card
+        color="primary"
+        flat
+        tile
+        class="indigo lighten-1 white--text text-center"
+      >
+        <v-card-text>
+          <v-btn
+            v-for="icon in icons"
+            :key="icon"
+            class="mx-4 white--text"
+            icon
+          >
+            <v-icon size="24px">
+              {{ icon }}
+            </v-icon>
+          </v-btn>
+        </v-card-text>
+
+        <v-card-text class="white--text pt-0">
+          Phasellus feugiat arcu sapien, et iaculis ipsum elementum sit amet.
+          Mauris cursus commodo interdum. Praesent ut risus eget metus luctus
+          accumsan id ultrices nunc. Sed at orci sed massa consectetur dignissim
+          a sit amet dui. Duis commodo vitae velit et faucibus. Morbi vehicula
+          lacinia malesuada. Nulla placerat augue vel ipsum ultrices, cursus
+          iaculis dui sollicitudin. Vestibulum eu ipsum vel diam elementum
+          tempor vel ut orci. Orci varius natoque penatibus et magnis dis
+          parturient montes, nascetur ridiculus mus.
+        </v-card-text>
+
+        <v-divider></v-divider>
+
+        <v-card-text class="white--text">
+          {{ new Date().getFullYear() }} — <strong>Vuetify</strong>
+        </v-card-text>
+      </v-card>
+    </v-footer>
   </v-container>
 </template>
 <script>
@@ -34,13 +84,17 @@ export default {
       description: '',
       image: '',
       sell: false,
+      video: '',
       category: '',
       quantity: 0
     }
   },
   methods: {
     addCart () {
-      this.$store.dispatch('user/addCart', { product: this.$route.params.id, quantity: this.quantity })
+      this.$store.dispatch('user/addCart', {
+        product: this.$route.params.id,
+        quantity: this.quantity
+      })
     }
   },
   computed: {
@@ -55,6 +109,7 @@ export default {
       this.price = data.result.price
       this.description = data.result.description
       this.image = data.result.image
+      this.video = data.result.video
       this.sell = data.result.sell
       this.category = data.result.category
       document.title = `${this.name} | 購物網`

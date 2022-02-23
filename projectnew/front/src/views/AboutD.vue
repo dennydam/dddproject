@@ -11,22 +11,6 @@
       <div class="container01">
         <v-container fluid class="card">
           <h1>訓練菜單</h1>
-
-          <!-- cardtest -->
-          <!-- <v-container>
-            <v-row>
-              <v-col
-                cols="12"
-                md="6"
-                lg="3"
-                v-for="product in products"
-                :key="product._id"
-              >
-                <ProductCard :product="product"></ProductCard>
-              </v-col>
-            </v-row>
-          </v-container> -->
-          <!-- cardtest -->
           <v-divider class="mx-4 my-4"></v-divider>
           <v-row>
             <v-col
@@ -38,24 +22,40 @@
               lg="3"
               xl="3"
             >
-                <v-card max-width="270">
-                  <v-img
-                    :src="product.image"
-                    class="white--text align-end"
-                    gradient="to bottom, rgba(0,0,0,.1), rgba(0,0,0,.5)"
-                    height="250px"
-                  >
-                    <v-card-title>
-                      <router-link :to='"/product/" + product._id'>{{ product.name }}</router-link></v-card-title>
-                  </v-img>
-                   <v-card-text v-text="product.description"></v-card-text>
-                    <v-divider class="mx-4"></v-divider>
+              <v-card max-width="270">
+                <v-img
+                  :src="product.image"
+                  class="white--text align-end"
+                  gradient="to bottom, rgba(0,0,0,.1), rgba(0,0,0,.5)"
+                  height="250px"
+                >
+                </v-img>
+                <v-btn icon @click="show = !show">
+                  <v-icon>{{
+                    show ? 'mdi-chevron-up' : 'mdi-chevron-down'
+                  }}</v-icon>
+                </v-btn>
+                <v-expand-transition>
+                  <div v-show="show">
+                    <v-divider></v-divider>
 
-                    <v-card-actions>
-                      <v-spacer></v-spacer>
-                      <v-btn color="deep-purple lighten-2" text> START </v-btn>
-                    </v-card-actions>
-                </v-card>
+                    <v-card-text v-text="product.description"></v-card-text>
+                  </div>
+                </v-expand-transition>
+                <v-divider class="mx-4"></v-divider>
+
+                <v-card-actions>
+                  <v-spacer></v-spacer>
+                  <v-btn>
+                    <router-link
+                      color="deep-purple lighten-2"
+                      text
+                      :to="'/product/' + product._id"
+                      >Start
+                    </router-link>
+                  </v-btn>
+                </v-card-actions>
+              </v-card>
             </v-col>
           </v-row>
         </v-container>
@@ -144,7 +144,7 @@
       <!-- test -->
       <div class="container01">
         <v-container fluid class="card">
-          <h1>訓練菜單</h1>
+          <h1>飲食清單</h1>
           <v-divider class="mx-4 my-4"></v-divider>
 
           <v-tabs v-model="tab" background-color="#dde0d9" dark>
@@ -154,14 +154,14 @@
           </v-tabs>
 
           <v-tabs-items v-model="tab" class="ccc">
-            <v-tab-item v-for="(item, index) in items" :key="item.tab">
+            <v-tab-item v-for="item in items" :key="item.tab">
               <v-row>
                 <v-col
                   cols="12"
                   md="6"
                   lg="3"
                   xl="3"
-                  v-for="product in products[index]"
+                  v-for="product in products"
                   :key="product._id"
                 >
                   <v-card max-width="250">
@@ -237,6 +237,7 @@ export default {
   // },
   data () {
     return {
+      show: false,
       products: [],
       tab: null,
       items: [

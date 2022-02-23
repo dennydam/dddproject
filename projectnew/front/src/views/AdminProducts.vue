@@ -12,14 +12,19 @@
       hide-overlay="false"
     >
       <template v-slot:activator="{ on, attrs }">
-        <v-btn color="primary" dark v-bind="attrs" v-on="on" width="200px">
+        <v-btn
+          class="additem"
+          color="primary"
+          dark
+          v-bind="attrs"
+          v-on="on"
+          width="200px"
+        >
           Open Dialog
         </v-btn>
       </template>
       <v-card>
-        <v-form
-          ref="form"
-        >
+        <v-form ref="form">
           <v-text-field
             label="商品名稱"
             v-model="form.name"
@@ -32,9 +37,7 @@
           </v-text-field>
         </v-form>
 
-        <v-form
-          ref="form"
-        >
+        <v-form ref="form">
           <v-text-field
             v-model.number="form.price"
             type="number"
@@ -47,9 +50,7 @@
           </v-text-field>
         </v-form>
 
-        <v-form
-          ref="form"
-        >
+        <v-form ref="form">
           <v-select
             v-model="form.category"
             required
@@ -60,9 +61,17 @@
           </v-select>
         </v-form>
 
-        <v-form
-          ref="form"
-        >
+        <v-form ref="form">
+          <v-text-field
+            v-model="form.video"
+            required
+            placeholder="請輸入影片網址"
+            outlined
+          >
+          </v-text-field>
+        </v-form>
+
+        <v-form ref="form">
           <v-textarea
             v-model="form.description"
             :state="state.description"
@@ -109,109 +118,112 @@
       </v-card>
     </v-dialog>
     <!-- table -->
-    <v-container width="70%">
-    <v-data-table
-      ref="table"
-      :headers="headers"
-      :items="products"
-      sort-by="calories"
-      class="elevation-1"
-    >
-      <template v-slot:[`item.imag`]="{ item }">
-        <img :src="item.image" style="width: 100px" />
-      </template>
-      <template v-slot:top>
-        <v-toolbar flat>
-          <v-toolbar-title>請編輯商品</v-toolbar-title>
-          <v-divider class="mx-4" inset vertical></v-divider>
-          <v-spacer></v-spacer>
-          <v-dialog v-model="dialog" max-width="500px">
-            <!-- <template v-slot:activator="{ on, attrs }">
+    <v-container width="200px">
+      <v-data-table
+        ref="table"
+        :headers="headers"
+        :items="products"
+        sort-by="calories"
+        class="elevation-1"
+      >
+        <template v-slot:[`item.imag`]="{ item }">
+          {{ item }}
+          <img :src="item.image" style="width: 100px" />
+        </template>
+        <template v-slot:top>
+          <v-toolbar flat>
+            <v-toolbar-title>請編輯商品</v-toolbar-title>
+            <v-divider class="mx-4" inset vertical></v-divider>
+            <v-spacer></v-spacer>
+            <v-dialog v-model="dialog" max-width="500px">
+              <!-- <template v-slot:activator="{ on, attrs }">
               <v-btn color="primary" dark class="mb-2" v-bind="attrs" v-on="on">
                 New Item
               </v-btn>
             </template> -->
-            <v-card>
-              <v-card-title>
-                <span class="text-h5">{{ formTitle }}</span>
-              </v-card-title>
+              <v-card>
+                <v-card-title>
+                  <span class="text-h5">{{ formTitle }}</span>
+                </v-card-title>
 
-              <v-card-text>
-                <v-container>
-                  <v-row>
-                    <v-col cols="12" sm="6" md="4">
-                      <v-text-field
-                        v-model="editedItem.name"
-                        label="Dessert name"
-                      ></v-text-field>
-                    </v-col>
-                    <v-col cols="12" sm="6" md="4">
-                      <v-text-field
-                        v-model="editedItem.price"
-                        label="price"
-                      ></v-text-field>
-                    </v-col>
-                    <v-col cols="12" sm="6" md="4">
-                      <v-text-field
-                        v-model="editedItem.price"
-                        label="Fat (g)"
-                      ></v-text-field>
-                    </v-col>
-                    <!-- <v-col>
+                <v-card-text>
+                  <v-container>
+                    <v-row>
+                      <v-col cols="12" sm="6" md="4">
+                        <v-text-field
+                          v-model="editedItem.name"
+                          label="Dessert name"
+                        ></v-text-field>
+                      </v-col>
+                      <v-col cols="12" sm="6" md="4">
+                        <v-text-field
+                          v-model="editedItem.price"
+                          label="price"
+                        ></v-text-field>
+                      </v-col>
+                      <v-col cols="12" sm="6" md="4">
+                        <v-text-field
+                          v-model="editedItem.price"
+                          label="Fat (g)"
+                        ></v-text-field>
+                      </v-col>
+                      <!-- <v-col>
                      <img :src="item.image" style="width:100px">
                     </v-col> -->
-                    <v-col cols="12" sm="6" md="4">
-                      <v-text-field
-                        v-model="editedItem.image"
-                        label="Carbs (g)"
-                      ></v-text-field>
-                    </v-col>
-                    <v-col cols="12" sm="6" md="4">
-                      <v-text-field
-                        v-model="editedItem.protein"
-                        label="Protein (g)"
-                      ></v-text-field>
-                    </v-col>
-                  </v-row>
-                </v-container>
-              </v-card-text>
+                      <v-col cols="12" sm="6" md="4">
+                        <v-text-field
+                          v-model="editedItem.image"
+                          label="Carbs (g)"
+                        ></v-text-field>
+                      </v-col>
+                      <v-col cols="12" sm="6" md="4">
+                        <v-text-field
+                          v-model="editedItem.protein"
+                          label="Protein (g)"
+                        ></v-text-field>
+                      </v-col>
+                    </v-row>
+                  </v-container>
+                </v-card-text>
 
-              <v-card-actions>
-                <v-spacer></v-spacer>
-                <v-btn color="blue darken-1" text @click="close">
-                  Cancel
-                </v-btn>
-                <v-btn color="blue darken-1" text @click="save"> Save </v-btn>
-              </v-card-actions>
-            </v-card>
-          </v-dialog>
-          <v-dialog v-model="dialogDelete" max-width="500px">
-            <v-card>
-              <v-card-title class="text-h5"
-                >Are you sure you want to delete this item?</v-card-title
-              >
-              <v-card-actions>
-                <v-spacer></v-spacer>
-                <v-btn color="blue darken-1" text @click="closeDelete"
-                  >Cancel</v-btn
+                <v-card-actions>
+                  <v-spacer></v-spacer>
+                  <v-btn color="blue darken-1" text @click="close">
+                    Cancel
+                  </v-btn>
+                  <v-btn color="blue darken-1" text @click="save"> Save </v-btn>
+                </v-card-actions>
+              </v-card>
+            </v-dialog>
+            <v-dialog v-model="dialogDelete" max-width="500px">
+              <v-card>
+                <v-card-title class="text-h5"
+                  >Are you sure you want to delete this item?</v-card-title
                 >
-                <v-btn color="blue darken-1" text @click="deleteItemConfirm"
-                  >OK</v-btn
-                >
-                <v-spacer></v-spacer>
-              </v-card-actions>
-            </v-card>
-          </v-dialog>
-        </v-toolbar>
-      </template>
-      <template v-slot:[`item.actions`]="{ item }">
-        <v-icon small class="mr-2" @click="editItem(item)"> mdi-pencil </v-icon>
-        <v-icon small @click="deleteItem(item)"> mdi-delete </v-icon>
-      </template>
-      <template v-slot:no-data>
-        <v-btn color="primary" @click="initialize"> Reset </v-btn>
-      </template>
-    </v-data-table>
+                <v-card-actions>
+                  <v-spacer></v-spacer>
+                  <v-btn color="blue darken-1" text @click="closeDelete"
+                    >Cancel</v-btn
+                  >
+                  <v-btn color="blue darken-1" text @click="deleteItemConfirm"
+                    >OK</v-btn
+                  >
+                  <v-spacer></v-spacer>
+                </v-card-actions>
+              </v-card>
+            </v-dialog>
+          </v-toolbar>
+        </template>
+        <template v-slot:[`item.actions`]="{ item }">
+          <v-icon small class="mr-2" @click="editItem(item)">
+            mdi-pencil
+          </v-icon>
+          <v-icon small @click="deleteItem(item)"> mdi-delete </v-icon>
+        </template>
+        <template v-slot:no-data>
+          <v-btn color="primary" @click="initialize"> Reset </v-btn>
+        </template>
+      </v-data-table>
     </v-container>
     <!-- <v-simple-table>
     <template v-slot:default>
@@ -257,6 +269,7 @@ export default {
         sell: false,
         description: '',
         category: '',
+        video: null,
         _id: ''
       },
       // editProduct (index) {
@@ -284,6 +297,7 @@ export default {
         { text: 'Calories', value: 'price' },
         { text: 'Fat (g)', value: 'category' },
         { text: 'Carbs (g)', value: 'imag' },
+        { text: 'video (g)', value: 'video' },
         { text: 'Actions', value: 'actions', sortable: false }
       ],
       editedIndex: -1,
@@ -471,11 +485,11 @@ export default {
     //   ]
     // },
     async editItem (item) {
-      // this.editedIndex = this.products.indexOf(item)
-      // console.log(this.products.indexOf(item))
-      // console.log(item)
-      // this.form.name = this.products[this.editedIndex].name
-      // this.dialog1 = true
+      this.editedIndex = this.products.indexOf(item)
+      console.log(this.products.indexOf(item))
+      console.log(item)
+      this.form.name = this.products[this.editedIndex].name
+      this.dialog1 = true
     },
     closeDelete () {
       this.dialogDelete = false
@@ -494,7 +508,8 @@ export default {
       this.closeDelete()
       try {
         await this.api.delete(
-          '/products/' + this.products[this.editedIndex]._id, {
+          '/products/' + this.products[this.editedIndex]._id,
+          {
             headers: {
               authorization: 'Bearer ' + this.user.token
             }
@@ -565,5 +580,16 @@ export default {
 <style>
 .table {
   margin-top: 500px;
+}
+
+.container {
+  max-width: 1000px;
+}
+
+.additem {
+  position: absolute;
+  left: 620px;
+  top: 25px;
+  z-index: 22;
 }
 </style>
