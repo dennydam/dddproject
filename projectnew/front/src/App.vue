@@ -32,10 +32,18 @@
         </v-list>
       </v-menu> -->
 
-      <v-toolbar-items class="hidden-sm-and-down" >
-        <v-menu v-for="(n, index) in menu" :key="index" open-on-hover offset-y allow-overflow >
+      <v-toolbar-items class="hidden-sm-and-down">
+        <v-menu
+          v-for="(n, index) in menu"
+          :key="index"
+          open-on-hover
+          offset-y
+          allow-overflow
+        >
           <template v-slot:activator="{ on, attrs }">
-            <v-btn :to="n.url" text v-bind="attrs" v-on="on"> {{ n.title }}</v-btn>
+            <v-btn :to="n.url" text v-bind="attrs" v-on="on">
+              {{ n.title }}</v-btn
+            >
           </template>
           <v-list v-if="n.submenu">
             <v-list-item
@@ -144,7 +152,7 @@
         ></video>
       </div> -->
 
-      <router-view/>
+      <router-view />
     </v-main>
   </v-app>
 </template>
@@ -171,8 +179,11 @@ export default {
         index: '2',
         icon: 'info',
         title: 'Tranning',
-        submenu: [{ itemIndex: '2-1', itemTitle: 'Tranning', url: '/about' },
-          { itemIndex: '2-1', itemTitle: 'Tranning', url: '/about' }
+        submenu: [
+          { itemIndex: '2-1', itemTitle: 'count', url: '/login' },
+          { itemIndex: '2-1', itemTitle: 'Tranning', url: '/about' },
+          { itemIndex: '2-1', itemTitle: '購物車', url: '/cart' },
+          { itemIndex: '2-1', itemTitle: 'board', url: '/board' }
         ]
       },
       { index: '3', icon: 'warning', title: '管理者', url: '/admin' }
@@ -265,7 +276,7 @@ export default {
 <style lang="scss" scoped>
 @import url('https://fonts.googleapis.com/css?family=Roboto+Condensed');
 
-.register{
+.register {
   color: white;
 }
 </style>

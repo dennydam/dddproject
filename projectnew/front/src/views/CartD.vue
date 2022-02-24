@@ -1,6 +1,7 @@
 
 <template>
   <v-container>
+    <p>總熱量 {{ total }}</p>
     <v-simple-table>
       <template v-slot:default>
         <thead>
@@ -17,17 +18,23 @@
             <td>{{ item.product.price }}</td>
             <td><img :src="item.product.image" style="width: 100px" /></td>
             <td>
-              <v-form ref="form">
-                <v-text-field
-                  v-model="products[index].quantity"
-                  type="number"
-                  required
-                  min="1"
-                  @input="updateCart(index, products[index].quantity)"
-                >
-                </v-text-field>
-                <v-btn @click="updateCart(index, 0)">X</v-btn>
-              </v-form>
+              <v-row>
+                <v-col>
+                  <v-form ref="form">
+                    <v-text-field
+                      v-model="products[index].quantity"
+                      type="number"
+                      required
+                      min="1"
+                      @input="updateCart(index, products[index].quantity)"
+                    >
+                    </v-text-field>
+                  </v-form>
+                </v-col>
+                <v-col>
+                  <v-btn class="mt-5" @click="updateCart(index, 0)">刪除</v-btn>
+                </v-col>
+              </v-row>
             </td>
           </tr>
         </tbody>
@@ -67,6 +74,13 @@ export default {
           text: '修改購物車失敗'
         })
       }
+    }
+  },
+  computed: {
+    total () {
+      return this.products.reduce((accumulator, currentValue) => {
+        return accumulator + currentValue.quantity * currentValue.product.price
+      }, 0)
     }
   },
   async created () {
