@@ -88,19 +88,6 @@
           <v-radio :value="true" label="上架">上架</v-radio>
           <v-radio label="下架" :value="false">下嫁</v-radio>
         </v-radio-group>
-        <img-inputer
-          v-model="form.image"
-          accept="image/*"
-          theme="light"
-          size="large"
-          bottom-text="點選或拖拽圖片以修改"
-          hover-text="點選或拖拽圖片以修改"
-          placeholder="點選或拖拽選擇圖片"
-          :max-size="1000"
-          exceed-size-text="檔案大小不能超過"
-          width="500px"
-        />
-
         <v-card-actions>
           <v-spacer></v-spacer>
           <v-btn
@@ -170,12 +157,6 @@
                       <!-- <v-col>
                      <img :src="item.image" style="width:100px">
                     </v-col> -->
-                      <v-col cols="12" sm="6" md="4">
-                        <v-text-field
-                          v-model="editedItem.image"
-                          label="Carbs (g)"
-                        ></v-text-field>
-                      </v-col>
                       <v-col cols="12" sm="6" md="4">
                         <v-text-field
                           v-model="editedItem.protein"
@@ -289,16 +270,14 @@ export default {
       dialogDelete: false,
       headers: [
         {
-          text: 'Dessert (100g serving)',
+          text: '主題',
           align: 'start',
           sortable: false,
           value: 'name'
         },
         { text: 'Calories', value: 'price' },
-        { text: 'Fat (g)', value: 'category' },
-        { text: 'Carbs (g)', value: 'imag' },
         { text: 'video (g)', value: 'video' },
-        { text: 'Actions', value: 'actions', sortable: false }
+        { text: '編輯', value: 'actions', sortable: false }
       ],
       editedIndex: -1,
       editedItem: {

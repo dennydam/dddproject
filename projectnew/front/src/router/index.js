@@ -33,6 +33,15 @@ const routes = [
     }
   },
   {
+    path: '/product2/:id',
+    name: 'Product2',
+    component: () =>
+      import(/* webpackChunkName: "product2" */ '../views/ProducT2.vue'),
+    meta: {
+      title: '商品 | 購物網'
+    }
+  },
+  {
     path: '/cart',
     name: 'Cart',
     component: () => import(/* webpackChunkName: "cart" */ '../views/CartD.vue'),

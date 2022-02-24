@@ -8,9 +8,60 @@
       ></v-carousel-item>
     </v-carousel>
     <div id="section01">
+        <div class="container01">
+        <v-container fluid class="card">
+          <h1>訓練清單</h1>
+          <v-divider class="mx-4 my-4"></v-divider>
+
+          <v-tabs v-model="tab" class="mb-4" background-color="#dde0d9" dark>
+            <v-tab v-for="item in items" :key="item.tab">
+              {{ item.tab }}
+            </v-tab>
+          </v-tabs>
+
+          <v-tabs-items v-model="tab" >
+            <v-tab-item v-for="item in items" :key="item.tab" class="ccc">
+              <v-row>
+                <v-col
+                  cols="12"
+                  md="6"
+                  lg="3"
+                  xl="3"
+                  v-for="product in products2"
+                  :key="product._id"
+                >
+                  <v-card max-width="250"  >
+                    <v-img
+                      :src="product.image"
+                      class="white--text align-end"
+                      gradient="to bottom, rgba(0,0,0,.1), rgba(0,0,0,.5)"
+                      height="250px"
+                    >
+                      <v-card-title v-text="product.name"></v-card-title>
+                    </v-img>
+                    <v-card-text v-text="product.description"> </v-card-text>
+                    <v-divider class="mx-4"></v-divider>
+                    <v-card-actions>
+                      <v-spacer></v-spacer>
+                          <v-btn>
+                    <router-link
+                      color="deep-purple lighten-2"
+                      text
+                      :to="'/product2/' + product._id"
+                      >Start
+                    </router-link>
+                  </v-btn>
+                    </v-card-actions>
+                  </v-card>
+                </v-col>
+              </v-row>
+            </v-tab-item>
+          </v-tabs-items>
+        </v-container>
+      </div>
       <div class="container01">
         <v-container fluid class="card">
-          <h1>訓練菜單</h1>
+          <h1>飲食清單</h1>
           <v-divider class="mx-4 my-4"></v-divider>
           <v-row>
             <v-col
@@ -142,51 +193,7 @@
     </v-container>
     </div> -->
       <!-- test -->
-      <div class="container01">
-        <v-container fluid class="card">
-          <h1>飲食清單</h1>
-          <v-divider class="mx-4 my-4"></v-divider>
 
-          <v-tabs v-model="tab" background-color="#dde0d9" dark>
-            <v-tab v-for="item in items" :key="item.tab">
-              {{ item.tab }}
-            </v-tab>
-          </v-tabs>
-
-          <v-tabs-items v-model="tab" class="ccc">
-            <v-tab-item v-for="item in items" :key="item.tab">
-              <v-row>
-                <v-col
-                  cols="12"
-                  md="6"
-                  lg="3"
-                  xl="3"
-                  v-for="product in products2"
-                  :key="product._id"
-                >
-                  <v-card max-width="250">
-                    <v-img
-                      :src="product.image"
-                      class="white--text align-end"
-                      gradient="to bottom, rgba(0,0,0,.1), rgba(0,0,0,.5)"
-                      height="250px"
-                    >
-                      <v-card-title v-text="product.name"></v-card-title>
-                    </v-img>
-                    <v-card-text v-text="product.description"> </v-card-text>
-                    <v-divider class="mx-4"></v-divider>
-
-                    <v-card-actions>
-                      <v-spacer></v-spacer>
-                      <v-btn color="deep-purple lighten-2" text> START </v-btn>
-                    </v-card-actions>
-                  </v-card>
-                </v-col>
-              </v-row>
-            </v-tab-item>
-          </v-tabs-items>
-        </v-container>
-      </div>
     </div>
     <!-- footer -->
     <v-footer dark padless>
@@ -364,6 +371,7 @@ export default {
 <style lang="scss" scoped>
 .card {
   max-width: 70%;
+
 }
 
 .container01 {
@@ -373,6 +381,6 @@ export default {
 }
 
 .ccc {
-  background-color: #dde0d9;
+   background-color:#dde0d9;
 }
 </style>

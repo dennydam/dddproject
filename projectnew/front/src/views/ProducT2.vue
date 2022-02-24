@@ -3,9 +3,9 @@
   <v-container mt-15>
     <div id="section01">
       <v-row>
-        <v-col  cols="6" class="content1 mt-10 youtube" align="center" justify="center">
+        <v-col cols="6" class="content1 mt-10" align="center" justify="center">
           <iframe
-            width="500"
+            width="560"
             height="315"
             :src="video"
             title="YouTube video player"
@@ -14,25 +14,14 @@
             allowfullscreen
           ></iframe>
         </v-col>
-        <v-col cols="6" class="worktext" align="center" justify="center">
+        <v-col cols="6" class="worktext">
           <h1>訓練說明</h1>
           <v-card>
             <h1>{{ description }}</h1>
           </v-card>
         </v-col>
-        <v-col cols="6">
-          <v-form ref="form">
-            <v-text-field
-              v-model.number="quantity"
-              type="number"
-              required
-              :state="quantityState"
-              min="0"
-            >
-            </v-text-field>
-            <v-btn class="mr-10" @click="addCart">加入訓練菜單</v-btn>
-            <v-btn @click="addCart">回去訓練頁</v-btn>
-          </v-form>
+        <v-col cols="6" align="center" justify="center">
+          <v-btn @click="addCart">回去訓練頁</v-btn>
         </v-col>
       </v-row>
     </div>
@@ -114,7 +103,7 @@ export default {
   },
   async created () {
     try {
-      const { data } = await this.api.get('/products/' + this.$route.params.id)
+      const { data } = await this.api.get('/products2/' + this.$route.params.id)
       this.name = data.result.name
       this.price = data.result.price
       this.description = data.result.description
@@ -133,10 +122,10 @@ export default {
 </script>
 <style>
 .v-main{
-      padding: 123px 0px 0px
+      padding: 100px 0px 0px
 }
 
-.youtube{
-  margin-left:100px ;
+.v-application .mt-14 {
+    margin-top: 150px !important;
 }
 </style>

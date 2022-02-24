@@ -51,17 +51,6 @@
         </v-form>
 
         <v-form ref="form">
-          <v-select
-            v-model="form.category"
-            required
-            :items="categories"
-            :state="state.category"
-            outlined
-          >
-          </v-select>
-        </v-form>
-
-        <v-form ref="form">
           <v-text-field
             v-model="form.video"
             required
@@ -260,7 +249,6 @@ export default {
   data () {
     return {
       modalSubmitting: false,
-      categories: [{ text: '請選擇分類', value: '' }, '訓練菜單', '飲食菜單'],
       products: [],
       form: {
         name: '',
@@ -269,7 +257,6 @@ export default {
         sell: false,
         description: '',
         category: '',
-        video: null,
         _id: ''
       },
       // editProduct (index) {
@@ -297,7 +284,6 @@ export default {
         { text: 'Calories', value: 'price' },
         { text: 'Fat (g)', value: 'category' },
         { text: 'Carbs (g)', value: 'imag' },
-        { text: 'video (g)', value: 'video' },
         { text: 'Actions', value: 'actions', sortable: false }
       ],
       editedIndex: -1,
@@ -325,8 +311,7 @@ export default {
     state () {
       return {
         name: this.form.name.length === 0 ? null : true,
-        price: this.form.price === null ? null : this.form.price >= 0,
-        category: this.form.category.length === 0 ? null : true
+        price: this.form.price === null ? null : this.form.price >= 0
       }
     },
     formTitle () {
@@ -348,7 +333,7 @@ export default {
 
   methods: {
     async submitModal () {
-      if (!this.state.name || !this.state.price || !this.state.category) {
+      if (!this.state.name || !this.state.price) {
         return
       }
       this.modalSubmitting = true
@@ -392,7 +377,6 @@ export default {
           description: '',
           image: null,
           sell: false,
-          category: '',
           _id: '',
           index: ''
         }
