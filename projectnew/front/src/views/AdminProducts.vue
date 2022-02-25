@@ -1,5 +1,5 @@
 <template>
-  <v-app>
+  <div>
     <!-- <v-data-table class="table" :items="products" :fields='fields' :items-per-page="5">
     </v-data-table> -->
     <v-dialog
@@ -20,7 +20,7 @@
           v-on="on"
           width="200px"
         >
-          Open Dialog
+          請新增
         </v-btn>
       </template>
       <v-card>
@@ -77,18 +77,20 @@
           <v-radio :value="true" label="上架">上架</v-radio>
           <v-radio label="下架" :value="false">下嫁</v-radio>
         </v-radio-group>
-        <img-inputer
-          v-model="form.image"
-          accept="image/*"
-          theme="light"
-          size="large"
-          bottom-text="點選或拖拽圖片以修改"
-          hover-text="點選或拖拽圖片以修改"
-          placeholder="點選或拖拽選擇圖片"
-          :max-size="1000"
-          exceed-size-text="檔案大小不能超過"
-          width="500px"
-        />
+        <v-row align="center" justify="center" no-gutters>
+          <img-inputer
+            class="inputer"
+            v-model="form.image"
+            accept="image/*"
+            theme="light"
+            size="large"
+            bottom-text="點選或拖拽圖片以修改"
+            hover-text="點選或拖拽圖片以修改"
+            placeholder="點選或拖拽選擇圖片"
+            :max-size="1000"
+            exceed-size-text="檔案大小不能超過"
+          />
+        </v-row>
 
         <v-card-actions>
           <v-spacer></v-spacer>
@@ -107,13 +109,13 @@
       </v-card>
     </v-dialog>
     <!-- table -->
-    <v-container width="200px">
+    <v-container>
       <v-data-table
         ref="table"
         :headers="headers"
         :items="products"
         sort-by="calories"
-        class="elevation-1"
+        class="elevation-1 mt-16"
       >
         <template v-slot:[`item.imag`]="{ item }">
           {{ item }}
@@ -242,7 +244,7 @@
       </tbody>
     </template>
   </v-simple-table> -->
-  </v-app>
+  </div>
 </template>
 <script>
 export default {
@@ -561,9 +563,9 @@ export default {
   }
 }
 </script>
-<style>
+<style scoped>
 .table {
-  margin-top: 500px;
+  margin-top: 600px;
 }
 
 .container {
@@ -573,7 +575,7 @@ export default {
 .additem {
   position: absolute;
   left: 620px;
-  top: 25px;
+  top: 50px;
   z-index: 22;
 }
 </style>

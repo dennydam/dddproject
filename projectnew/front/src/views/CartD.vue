@@ -1,45 +1,49 @@
 
 <template>
   <v-container>
-    <p>總熱量 {{ total }}</p>
-    <v-simple-table>
-      <template v-slot:default>
-        <thead>
-          <tr>
-            <th class="text-left">Name</th>
-            <th class="text-left">Calories</th>
-            <th class="text-left">image</th>
-            <th class="text-left">操作</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr v-for="(item, index) in products" :key="item.denny">
-            <td>{{ item.product.name }}</td>
-            <td>{{ item.product.price }}</td>
-            <td><img :src="item.product.image" style="width: 100px" /></td>
-            <td>
-              <v-row>
-                <v-col>
-                  <v-form ref="form">
-                    <v-text-field
-                      v-model="products[index].quantity"
-                      type="number"
-                      required
-                      min="1"
-                      @input="updateCart(index, products[index].quantity)"
+    <div class="table">
+      <p>總熱量 {{ total }}</p>
+      <v-simple-table>
+        <template v-slot:default>
+          <thead>
+            <tr>
+              <th class="text-left">Name</th>
+              <th class="text-left">Calories</th>
+              <th class="text-left">image</th>
+              <th class="text-left">操作</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr v-for="(item, index) in products" :key="item.denny">
+              <td>{{ item.product.name }}</td>
+              <td>{{ item.product.price }}</td>
+              <td><img :src="item.product.image" style="width: 100px" /></td>
+              <td>
+                <v-row>
+                  <v-col>
+                    <v-form ref="form">
+                      <v-text-field
+                        v-model="products[index].quantity"
+                        type="number"
+                        required
+                        min="1"
+                        @input="updateCart(index, products[index].quantity)"
+                      >
+                      </v-text-field>
+                    </v-form>
+                  </v-col>
+                  <v-col>
+                    <v-btn class="mt-5" @click="updateCart(index, 0)"
+                      >刪除</v-btn
                     >
-                    </v-text-field>
-                  </v-form>
-                </v-col>
-                <v-col>
-                  <v-btn class="mt-5" @click="updateCart(index, 0)">刪除</v-btn>
-                </v-col>
-              </v-row>
-            </td>
-          </tr>
-        </tbody>
-      </template>
-    </v-simple-table>
+                  </v-col>
+                </v-row>
+              </td>
+            </tr>
+          </tbody>
+        </template>
+      </v-simple-table>
+    </div>
   </v-container>
 </template>
 
@@ -101,8 +105,13 @@ export default {
   }
 }
 </script>
-<style>
-.container {
+<style scope>
+.table {
+  width: 50%;
+  margin: auto;
+  margin-top: 200px;
+}
+.bb {
   width: 100%;
   padding: 151px;
   margin-right: auto;

@@ -1,7 +1,6 @@
 <template>
-  <v-app>
-    <v-container mt-15>
-      <v-card class="mx-auto card ms-16" height="200" width="256">
+  <div>
+      <v-card class="mx-auto card ms-16 my-16" height="200" width="256">
         <v-navigation-drawer class="white" dark permanent>
           <v-list>
             <v-btn class="pa-2" block color="primary" dark to="/admin/products">
@@ -30,9 +29,8 @@
           <v-btn rounded color="primary" dark> 訂單管理 </v-btn>
         </v-col>
       </v-row> -->
-    </v-container>
     <router-view></router-view>
-  </v-app>
+  </div>
 </template>
 <script>
 export default {
@@ -41,7 +39,7 @@ export default {
   }
 }
 </script>
-<style>
+<style scoped>
 .card {
   position: absolute;
   left: 20px;

@@ -1,5 +1,5 @@
 <template>
-  <v-app>
+  <div>
     <!-- <v-data-table class="table" :items="products2" :fields='fields' :items-per-page="5">
     </v-data-table> -->
     <v-dialog
@@ -51,17 +51,6 @@
         </v-form>
 
         <v-form ref="form">
-          <v-select
-            v-model="form.category"
-            required
-            :items="categories"
-            :state="state.category"
-            outlined
-          >
-          </v-select>
-        </v-form>
-
-        <v-form ref="form">
           <v-text-field
             v-model="form.video"
             required
@@ -83,11 +72,25 @@
           >
           </v-textarea>
         </v-form>
-
-        <v-radio-group v-model="form.sell" mandatory>
+        <v-radio-group v-model="form.sell" mandatory row>
           <v-radio :value="true" label="上架">上架</v-radio>
           <v-radio label="下架" :value="false">下嫁</v-radio>
         </v-radio-group>
+        <v-row align="center" justify="center" no-gutters>
+          <img-inputer
+            class="inputer"
+            v-model="form.image"
+            accept="image/*"
+            theme="light"
+            size="large"
+            bottom-text="點選或拖拽圖片以修改"
+            hover-text="點選或拖拽圖片以修改"
+            placeholder="點選或拖拽選擇圖片"
+            :max-size="1000"
+            exceed-size-text="檔案大小不能超過"
+          />
+        </v-row>
+
         <v-card-actions>
           <v-spacer></v-spacer>
           <v-btn
@@ -114,7 +117,6 @@
         class="elevation-1"
       >
         <template v-slot:[`item.imag`]="{ item }">
-          {{ item }}
           <img :src="item.image" style="width: 100px" />
         </template>
         <template v-slot:top>
@@ -234,7 +236,7 @@
       </tbody>
     </template>
   </v-simple-table> -->
-  </v-app>
+  </div>
 </template>
 <script>
 export default {
@@ -249,7 +251,6 @@ export default {
         image: null,
         sell: false,
         description: '',
-        category: '',
         video: null,
         _id: ''
       },
@@ -276,6 +277,7 @@ export default {
           value: 'name'
         },
         { text: 'Calories', value: 'price' },
+        { text: 'Carbs (g)', value: 'imag' },
         { text: 'video (g)', value: 'video' },
         { text: '編輯', value: 'actions', sortable: false }
       ],
@@ -304,8 +306,7 @@ export default {
     state () {
       return {
         name: this.form.name.length === 0 ? null : true,
-        price: this.form.price === null ? null : this.form.price >= 0,
-        category: this.form.category.length === 0 ? null : true
+        price: this.form.price === null ? null : this.form.price >= 0
       }
     },
     formTitle () {
@@ -327,7 +328,7 @@ export default {
 
   methods: {
     async submitModal () {
-      if (!this.state.name || !this.state.price || !this.state.category) {
+      if (!this.state.name || !this.state.price) {
         return
       }
       this.modalSubmitting = true
@@ -556,7 +557,7 @@ export default {
   }
 }
 </script>
-<style>
+<style scoped>
 .table {
   margin-top: 500px;
 }

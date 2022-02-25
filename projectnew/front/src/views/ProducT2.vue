@@ -1,32 +1,29 @@
 <template>
-<v-main>
-  <v-container mt-15>
-    <div id="section01">
-      <v-row>
-        <v-col cols="6" class="content1 mt-10" align="center" justify="center">
-          <iframe
-            width="560"
-            height="315"
-            :src="video"
-            title="YouTube video player"
-            frameborder="0"
-            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-            allowfullscreen
-          ></iframe>
-        </v-col>
-        <v-col cols="6" class="worktext">
-          <h1>訓練說明</h1>
-          <v-card>
-            <h1>{{ description }}</h1>
-          </v-card>
-        </v-col>
-        <v-col cols="6" align="center" justify="center">
-          <v-btn @click="addCart">回去訓練頁</v-btn>
-        </v-col>
-      </v-row>
-    </div>
-  </v-container>
-     <v-footer class="mt-14" dark padless>
+  <div id="section01">
+    <v-row>
+      <v-col cols="6" class="content1 mt-10" align="center" justify="center">
+        <iframe
+          width="560"
+          height="315"
+          :src="video"
+          title="YouTube video player"
+          frameborder="0"
+          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+          allowfullscreen
+        ></iframe>
+      </v-col>
+      <v-col cols="6" class="worktext">
+        <h1>訓練說明</h1>
+        <v-card>
+          <h1>{{ description }}</h1>
+        </v-card>
+      </v-col>
+      <v-col cols="6" align="center" justify="center">
+        <v-btn to="/">回去訓練頁</v-btn>
+      </v-col>
+    </v-row>
+
+    <v-footer dark padless>
       <v-card
         color="primary"
         flat
@@ -64,20 +61,13 @@
         </v-card-text>
       </v-card>
     </v-footer>
-  </v-main>
-
+  </div>
 </template>
 <script>
 export default {
   data () {
     return {
-      icons: [
-        'mdi-facebook',
-        'mdi-twitter',
-        'mdi-linkedin',
-        'mdi-instagram'
-
-      ],
+      icons: ['mdi-facebook', 'mdi-twitter', 'mdi-linkedin', 'mdi-instagram'],
       name: '',
       price: 0,
       description: '',
@@ -121,11 +111,4 @@ export default {
 }
 </script>
 <style>
-.v-main{
-      padding: 100px 0px 0px
-}
-
-.v-application .mt-14 {
-    margin-top: 150px !important;
-}
 </style>

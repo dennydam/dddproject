@@ -1,8 +1,8 @@
 <template>
   <v-app>
     <v-app-bar color="primary" dark app>
-      <v-toolbar-title class="pt-5"
-        ><img src="./assets/logo12.png" width="180px" height="80px" alt=""
+      <v-toolbar-title
+        ><v-img src="./assets/logo.svg" width="180px" alt=""
       /></v-toolbar-title>
       <v-app-bar-nav-icon></v-app-bar-nav-icon>
       <v-spacer></v-spacer>

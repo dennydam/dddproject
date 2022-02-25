@@ -8,8 +8,8 @@
       ></v-carousel-item>
     </v-carousel>
     <div id="section01">
-        <div class="container01">
-        <v-container fluid class="card">
+      <div class="container01">
+        <v-container class="aaa">
           <h1>訓練清單</h1>
           <v-divider class="mx-4 my-4"></v-divider>
 
@@ -19,7 +19,7 @@
             </v-tab>
           </v-tabs>
 
-          <v-tabs-items v-model="tab" >
+          <v-tabs-items v-model="tab">
             <v-tab-item v-for="item in items" :key="item.tab" class="ccc">
               <v-row>
                 <v-col
@@ -30,7 +30,7 @@
                   v-for="product in products2"
                   :key="product._id"
                 >
-                  <v-card max-width="250"  >
+                  <v-card max-width="250">
                     <v-img
                       :src="product.image"
                       class="white--text align-end"
@@ -43,14 +43,14 @@
                     <v-divider class="mx-4"></v-divider>
                     <v-card-actions>
                       <v-spacer></v-spacer>
-                          <v-btn>
-                    <router-link
-                      color="deep-purple lighten-2"
-                      text
-                      :to="'/product2/' + product._id"
-                      >Start
-                    </router-link>
-                  </v-btn>
+                      <v-btn>
+                        <router-link
+                          color="deep-purple lighten-2"
+                          text
+                          :to="'/product2/' + product._id"
+                          >Start
+                        </router-link>
+                      </v-btn>
                     </v-card-actions>
                   </v-card>
                 </v-col>
@@ -60,7 +60,7 @@
         </v-container>
       </div>
       <div class="container01">
-        <v-container fluid class="card">
+        <v-container fluid class="aaa">
           <h1>飲食清單</h1>
           <v-divider class="mx-4 my-4"></v-divider>
           <v-row>
@@ -193,7 +193,6 @@
     </v-container>
     </div> -->
       <!-- test -->
-
     </div>
     <!-- footer -->
     <v-footer dark padless>
@@ -370,8 +369,11 @@ export default {
 </script>
 <style lang="scss" scoped>
 .card {
-  max-width: 70%;
+  max-width: 20%;
+}
 
+.aaa {
+  max-width: 70%;
 }
 
 .container01 {
@@ -381,6 +383,10 @@ export default {
 }
 
 .ccc {
-   background-color:#dde0d9;
+  background-color: #dde0d9;
+}
+
+.footer {
+  padding: 22px;
 }
 </style>

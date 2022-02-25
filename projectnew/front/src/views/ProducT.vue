@@ -1,43 +1,45 @@
 <template>
-<v-main>
-  <v-container mt-15>
-    <div id="section01">
-      <v-row>
-        <v-col  cols="6" class="content1 mt-10 youtube" align="center" justify="center">
-          <iframe
-            width="500"
-            height="315"
-            :src="video"
-            title="YouTube video player"
-            frameborder="0"
-            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-            allowfullscreen
-          ></iframe>
-        </v-col>
-        <v-col cols="6" class="worktext" align="center" justify="center">
-          <h1>訓練說明</h1>
-          <v-card>
-            <h1>{{ description }}</h1>
-          </v-card>
-        </v-col>
-        <v-col cols="6">
-          <v-form ref="form">
-            <v-text-field
-              v-model.number="quantity"
-              type="number"
-              required
-              :state="quantityState"
-              min="0"
-            >
-            </v-text-field>
-            <v-btn class="mr-10" @click="addCart">加入訓練菜單</v-btn>
-            <v-btn @click="addCart">回去訓練頁</v-btn>
-          </v-form>
-        </v-col>
-      </v-row>
-    </div>
-  </v-container>
-     <v-footer class="mt-14" dark padless>
+  <v-main>
+    <v-container mt-15>
+      <div id="section01">
+        <v-row>
+          <v-col cols="6" class="content1" align="center" justify="center">
+            <v-img
+              width="500"
+              height="500"
+              :src="image"
+              title="YouTube video player"
+            ></v-img>
+          </v-col>
+          <v-col cols="6" class="worktext" align="center" justify="center">
+            <h1 class="mt-4">飲食說明</h1>
+              <v-card class="card1" >
+                <h1>{{ description }}</h1>
+              </v-card>
+
+              <v-card class="card2">
+                <h1>熱量:{{ price }}大卡</h1>
+              </v-card>
+
+          </v-col>
+          <v-col cols="6">
+            <v-form ref="form">
+              <v-text-field
+                v-model.number="quantity"
+                type="number"
+                required
+                :state="quantityState"
+                min="0"
+              >
+              </v-text-field>
+              <v-btn class="mr-10" @click="addCart">加入訓練菜單</v-btn>
+              <v-btn @click="addCart" >回去訓練頁</v-btn>
+            </v-form>
+          </v-col>
+        </v-row>
+      </div>
+    </v-container>
+    <v-footer class="mt-14" dark padless>
       <v-card
         color="primary"
         flat
@@ -76,19 +78,12 @@
       </v-card>
     </v-footer>
   </v-main>
-
 </template>
 <script>
 export default {
   data () {
     return {
-      icons: [
-        'mdi-facebook',
-        'mdi-twitter',
-        'mdi-linkedin',
-        'mdi-instagram'
-
-      ],
+      icons: ['mdi-facebook', 'mdi-twitter', 'mdi-linkedin', 'mdi-instagram'],
       name: '',
       price: 0,
       description: '',
@@ -132,11 +127,19 @@ export default {
 }
 </script>
 <style>
-.v-main{
-      padding: 123px 0px 0px
+.v-main {
+  padding: 123px 0px 0px;
 }
 
-.youtube{
-  margin-left:100px ;
+.youtube {
+  margin-left: 100px;
+}
+
+.card1{
+  margin-top:100px;
+}
+
+.card2{
+  margin-top:100px;
 }
 </style>

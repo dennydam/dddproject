@@ -1,5 +1,5 @@
 <template>
-  <v-container>
+  <div class="container">
     <h1>基礎代謝率</h1>
     <div class="mb-5">
       <h2>基礎代謝率 BMR（Basal Metabolic Rate）</h2>
@@ -93,7 +93,7 @@
         <p>您的TDEE:{{ TDEE }}</p>
       </v-col>
     </v-row>
-  </v-container>
+  </div>
 </template>
 
 <script>
@@ -156,6 +156,9 @@ export default {
 </script>
 <style>
 .container {
-  max-width: 1000px;
+  max-width: 800px;
+}
+.count {
+  height: 600px;
 }
 </style>
