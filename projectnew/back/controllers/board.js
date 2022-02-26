@@ -1,8 +1,28 @@
 import board from '../models/board.js'
 
+export const create4 = async (req, res) => {
+  console.log(req.body)
+  try {
+    const result = await board.findByIdAndUpdate(req.params.id, {
+      $push: {
+        messages: {
+          sender: req.user._id,
+          text: req.body.text,
+          account: req.body.account
+        }
+      }
+    }, { new: true, runValidators: true })
+
+    res.status(200).send({ success: true, message: '', result: result })
+  } catch (error) {
+    console.log(error)
+    res.status(500).send({ success: false, message: '伺服器錯誤' })
+  }
+}
+
 export const create3 = async (req, res) => {
   try {
-    const result = await board.create({ ...req.body, image: req.file.path })
+    const result = await board.create({ ...req.body })
     res.status(200).send({ success: true, message: '', result })
   } catch (error) {
     if (error.name === 'ValidationError') {
@@ -16,7 +36,7 @@ export const create3 = async (req, res) => {
 
 export const getProducts3 = async (req, res) => {
   try {
-    const result = await board.find({ sell: true })
+    const result = await board.find()
     res.status(200).send({ success: true, message: '', result })
   } catch (error) {
     res.status(500).send({ success: false, message: '伺服器錯誤' })
@@ -52,10 +72,8 @@ export const getProductById3 = async (req, res) => {
 export const updateProductById3 = async (req, res) => {
   const data = {
     name: req.body.name,
-    price: req.body.price,
-    description: req.body.description,
-    sell: req.body.sell,
-    categoey: req.body.categoey
+    description: req.body.description
+
   }
 
   if (req.file) {

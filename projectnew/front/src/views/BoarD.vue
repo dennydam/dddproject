@@ -4,7 +4,6 @@
     </v-data-table> -->
     <v-dialog
       id="modal-product"
-      :title="form._id.length > 0 ? '編輯商品' : '新增商品'"
       v-model="dialog1"
       persistent
       @click="resetForm"
@@ -38,40 +37,6 @@
         </v-form>
 
         <v-form ref="form">
-          <v-text-field
-            v-model.number="form.price"
-            type="number"
-            min="0"
-            required
-            placeholder="請輸入商品價格"
-            :state="state.price"
-            outlined
-          >
-          </v-text-field>
-        </v-form>
-
-        <v-form ref="form">
-          <v-select
-            v-model="form.category"
-            required
-            :items="categories"
-            :state="state.category"
-            outlined
-          >
-          </v-select>
-        </v-form>
-
-        <v-form ref="form">
-          <v-text-field
-            v-model="form.video"
-            required
-            placeholder="請輸入影片網址"
-            outlined
-          >
-          </v-text-field>
-        </v-form>
-
-        <v-form ref="form">
           <v-textarea
             v-model="form.description"
             :state="state.description"
@@ -83,23 +48,6 @@
           >
           </v-textarea>
         </v-form>
-
-        <v-radio-group v-model="form.sell" mandatory>
-          <v-radio :value="true" label="上架">上架</v-radio>
-          <v-radio label="下架" :value="false">下嫁</v-radio>
-        </v-radio-group>
-        <img-inputer
-          v-model="form.image"
-          accept="image/*"
-          theme="light"
-          size="large"
-          bottom-text="點選或拖拽圖片以修改"
-          hover-text="點選或拖拽圖片以修改"
-          placeholder="點選或拖拽選擇圖片"
-          :max-size="1000"
-          exceed-size-text="檔案大小不能超過"
-          width="500px"
-        />
 
         <v-card-actions>
           <v-spacer></v-spacer>
@@ -117,114 +65,74 @@
         </v-card-actions>
       </v-card>
     </v-dialog>
+   <!-- card -->
+   <!-- <v-btn align="left" class="flex " v-for="item in products2" :key="item._id" :value="item" @click="discussOpen(item)">
+          <div class="border">
+            <div class="row col-6 justify-between ">
+
+              <p class="col-12 title">{{ item.name }}</p>
+
+              <p class="des">{{ item.name }}</p>
+            </div>
+            <div class="flex row col-12 qus_card_bottom">
+              <p class="name" style="margin-right:auto">{{ products2.name  }}</p>
+              <p class="fb_length">{{ products2.name }}</p>
+            </div>
+          </div>
+        </v-btn> -->
     <!-- table -->
-    <v-container width="200px">
-      <v-data-table
-        ref="table"
-        :headers="headers"
-        :items="products2"
-        sort-by="calories"
-        class="elevation-1"
-      >
-        <template v-slot:[`item.imag`]="{ item }">
-          {{ item }}
-          <img :src="item.image" style="width: 100px" />
-        </template>
-        <template v-slot:top>
-          <v-toolbar flat>
-            <v-toolbar-title>請編輯商品</v-toolbar-title>
-            <v-divider class="mx-4" inset vertical></v-divider>
-            <v-spacer></v-spacer>
-            <v-dialog v-model="dialog" max-width="500px">
-              <!-- <template v-slot:activator="{ on, attrs }">
-              <v-btn color="primary" dark class="mb-2" v-bind="attrs" v-on="on">
-                New Item
-              </v-btn>
-            </template> -->
-              <v-card>
-                <v-card-title>
-                  <span class="text-h5">{{ formTitle }}</span>
-                </v-card-title>
-
-                <v-card-text>
-                  <v-container>
-                    <v-row>
-                      <v-col cols="12" sm="6" md="4">
-                        <v-text-field
-                          v-model="editedItem.name"
-                          label="Dessert name"
-                        ></v-text-field>
-                      </v-col>
-                      <v-col cols="12" sm="6" md="4">
-                        <v-text-field
-                          v-model="editedItem.price"
-                          label="price"
-                        ></v-text-field>
-                      </v-col>
-                      <v-col cols="12" sm="6" md="4">
-                        <v-text-field
-                          v-model="editedItem.price"
-                          label="Fat (g)"
-                        ></v-text-field>
-                      </v-col>
-                      <!-- <v-col>
-                     <img :src="item.image" style="width:100px">
-                    </v-col> -->
-                      <v-col cols="12" sm="6" md="4">
-                        <v-text-field
-                          v-model="editedItem.image"
-                          label="Carbs (g)"
-                        ></v-text-field>
-                      </v-col>
-                      <v-col cols="12" sm="6" md="4">
-                        <v-text-field
-                          v-model="editedItem.protein"
-                          label="Protein (g)"
-                        ></v-text-field>
-                      </v-col>
-                    </v-row>
-                  </v-container>
-                </v-card-text>
-
-                <v-card-actions>
-                  <v-spacer></v-spacer>
-                  <v-btn color="blue darken-1" text @click="close">
-                    Cancel
-                  </v-btn>
-                  <v-btn color="blue darken-1" text @click="save"> Save </v-btn>
-                </v-card-actions>
-              </v-card>
-            </v-dialog>
-            <v-dialog v-model="dialogDelete" max-width="500px">
-              <v-card>
-                <v-card-title class="text-h5"
-                  >Are you sure you want to delete this item?</v-card-title
+   <v-container mt-15>
+         <v-row>
+                <v-col
+                  cols="12"
+                  md="6"
+                  lg="3"
+                  xl="3"
+                  v-for="(item, index) in products2"
+                  :key="item._id"
                 >
-                <v-card-actions>
-                  <v-spacer></v-spacer>
-                  <v-btn color="blue darken-1" text @click="closeDelete"
-                    >Cancel</v-btn
-                  >
-                  <v-btn color="blue darken-1" text @click="deleteItemConfirm"
-                    >OK</v-btn
-                  >
-                  <v-spacer></v-spacer>
-                </v-card-actions>
-              </v-card>
-            </v-dialog>
-          </v-toolbar>
-        </template>
-        <template v-slot:[`item.actions`]="{ item }">
-          <v-icon small class="mr-2" @click="editItem(item)">
-            mdi-pencil
-          </v-icon>
-          <v-icon small @click="deleteItem(item)"> mdi-delete </v-icon>
-        </template>
-        <template v-slot:no-data>
-          <v-btn color="primary" @click="initialize"> Reset </v-btn>
-        </template>
-      </v-data-table>
-    </v-container>
+
+                  <v-card max-width="250">
+                      <v-card-title v-text="item.name"></v-card-title>
+                    <v-card-text v-text="products2[index].description"> </v-card-text>
+                    <v-divider class="mx-4"></v-divider>
+                    <v-card-actions>
+                      <v-spacer></v-spacer>
+                      <v-btn
+                        @click ="discussopen(item)">cc
+                      </v-btn>
+                    </v-card-actions>
+                  </v-card>
+                   <v-dialog
+                   max-width="600"
+                    v-model="discuss"
+                      >
+                    <v-card
+                    >
+                    <v-card-text>
+                    <h1>主題:{{ form.name }}</h1>
+                    <v-divider class="mx-4 my-4"></v-divider>
+                     <p>描述:{{ form.description }}</p>
+                     <v-divider class="mx-4 my-4"></v-divider>
+                     <p>{{ user.account }}</p>
+                     </v-card-text>
+                     <v-text-field
+                       v-model="text"
+                       outlined
+                       append-outer-icon="mdi-send"
+                       @click:append-outer="sendmessage()"
+                       >
+
+                     </v-text-field>
+                    </v-card>
+
+                       </v-dialog>
+
+                </v-col>
+
+              </v-row>
+              </v-container>
+
     <!-- <v-simple-table>
     <template v-slot:default>
       <thead>
@@ -259,17 +167,13 @@
 export default {
   data () {
     return {
+      sending: false,
+      text: '',
       modalSubmitting: false,
-      categories: [{ text: '請選擇分類', value: '' }, '訓練菜單', '飲食菜單'],
       products2: [],
       form: {
         name: '',
-        price: null,
-        image: null,
-        sell: false,
         description: '',
-        category: '',
-        video: null,
         _id: ''
       },
       // editProduct (index) {
@@ -284,58 +188,18 @@ export default {
       //   }
       //   this.$bvModal.show('modal-product')
       // },
+      discuss: false,
       dialog: false,
       dialog1: false,
       dialogDelete: false,
-      headers: [
-        {
-          text: '主題',
-          align: 'start',
-          sortable: false,
-          value: 'name'
-        },
-        { text: 'Calories', value: 'price' },
-        { text: 'Actions', value: 'actions', sortable: false }
-      ],
-      editedIndex: -1,
-      editedItem: {
-        name: '',
-        price: 0,
-        category: '',
-        calories: 0,
-        fat: 0,
-        carbs: 0,
-        protein: 0
-      },
-      defaultItem: {
-        name: '',
-        price: 0,
-        category: '',
-        calories: 0,
-        fat: 0,
-        carbs: 0,
-        protein: 0
-      }
+      editedIndex: -1
     }
   },
   computed: {
     state () {
       return {
-        name: this.form.name.length === 0 ? null : true,
-        price: this.form.price === null ? null : this.form.price >= 0,
-        category: this.form.category.length === 0 ? null : true
+        name: this.form.name.length === 0 ? null : true
       }
-    },
-    formTitle () {
-      return this.editedIndex === -1 ? 'New Item' : 'Edit Item'
-    }
-  },
-  watch: {
-    dialog (val) {
-      val || this.close()
-    },
-    dialogDelete (val) {
-      val || this.closeDelete()
     }
   },
 
@@ -345,7 +209,7 @@ export default {
 
   methods: {
     async submitModal () {
-      if (!this.state.name || !this.state.price || !this.state.category) {
+      if (!this.state.name) {
         return
       }
       this.modalSubmitting = true
@@ -367,27 +231,20 @@ export default {
           this.products2.push(data.result)
           this.dialog1 = false
         } else {
-          const { data } = await this.api.patch('/board/' + this.form._id, fd, {
+          await this.api.patch('/board/' + this.form._id, fd, {
             headers: {
               authorization: 'Bearer ' + this.user.token
             }
           })
           this.products2[this.form.index] = {
-            ...this.form,
-            image: data.result.image
+            ...this.form
           }
-          this.$refs.table.refresh()
         }
         this.modalSubmitting = false
         this.form = {
           name: '',
-          price: 0,
           description: '',
-          image: null,
-          sell: false,
-          category: '',
-          _id: '',
-          index: ''
+          _id: ''
         }
       } catch (error) {
         this.$swal({
@@ -397,160 +254,29 @@ export default {
         })
       }
     },
-    // resetForm (event) {
-    //   console.log('8888')
-    //   if (this.modalSubmitting) {
-    //     event.preventDefault()
-    //   }
-    // },
-    // initialize () {
-    //   this.desserts = [
-    //     {
-    //       name: 'Frozen Yogurt',
-    //       calories: 159,
-    //       fat: 6.0,
-    //       carbs: 24,
-    //       protein: 4.0
-    //     },
-    //     {
-    //       name: 'Ice cream sandwich',
-    //       calories: 237,
-    //       fat: 9.0,
-    //       carbs: 37,
-    //       protein: 4.3
-    //     },
-    //     {
-    //       name: 'Eclair',
-    //       calories: 262,
-    //       fat: 16.0,
-    //       carbs: 23,
-    //       protein: 6.0
-    //     },
-    //     {
-    //       name: 'Cupcake',
-    //       calories: 305,
-    //       fat: 3.7,
-    //       carbs: 67,
-    //       protein: 4.3
-    //     },
-    //     {
-    //       name: 'Gingerbread',
-    //       calories: 356,
-    //       fat: 16.0,
-    //       carbs: 49,
-    //       protein: 3.9
-    //     },
-    //     {
-    //       name: 'Jelly bean',
-    //       calories: 375,
-    //       fat: 0.0,
-    //       carbs: 94,
-    //       protein: 0.0
-    //     },
-    //     {
-    //       name: 'Lollipop',
-    //       calories: 392,
-    //       fat: 0.2,
-    //       carbs: 98,
-    //       protein: 0
-    //     },
-    //     {
-    //       name: 'Honeycomb',
-    //       calories: 408,
-    //       fat: 3.2,
-    //       carbs: 87,
-    //       protein: 6.5
-    //     },
-    //     {
-    //       name: 'Donut',
-    //       calories: 452,
-    //       fat: 25.0,
-    //       carbs: 51,
-    //       protein: 4.9
-    //     },
-    //     {
-    //       name: 'KitKat',
-    //       calories: 518,
-    //       fat: 26.0,
-    //       carbs: 65,
-    //       protein: 7
-    //     }
-    //   ]
-    // },
-    async editItem (item) {
-      this.editedIndex = this.products2.indexOf(item)
-      this.editedItem = Object.assign({}, item)
-      // this.editedIndex = this.products2.indexOf(item)
-      // console.log(this.products2.indexOf(item))
-      // console.log(item)
-      // this.form.name = this.products2[this.editedIndex].name
-      this.dialog = true
+    discussopen (item) {
+      console.log(item)
+      this.discuss = true
+      this.form.name = item.name
+      this.form._id = item._id
+      this.form.description = item.description
+      console.log(this.products2)
+      // this.form = item
     },
-    closeDelete () {
-      this.dialogDelete = false
-      this.$nextTick(() => {
-        this.editedItem = Object.assign({}, this.defaultItem)
-        this.editedIndex = -1
-      })
-    },
-    deleteItem (item) {
-      this.editedIndex = this.products2.indexOf(item)
-      this.editedItem = Object.assign({}, item)
-      this.dialogDelete = true
-    },
-    async deleteItemConfirm () {
-      this.products2.splice(this.editedIndex, 1)
-      this.closeDelete()
+    async sendmessage () {
       try {
-        await this.api.delete(
-          '/products2/' + this.products2[this.editedIndex]._id,
-          {
-            headers: {
-              authorization: 'Bearer ' + this.user.token
-            }
-          }
-        )
-      } catch (error) {
-        console.log(error)
-        alert('刪除失敗')
-      }
-    },
-    close () {
-      this.dialog = false
-      this.$nextTick(() => {
-        this.editedItem = Object.assign({}, this.defaultItem)
-        this.editedIndex = -1
-      })
-    },
-    async save () {
-      if (this.editedIndex > -1) {
-        Object.assign(this.products2[this.editedIndex], this.editedItem)
-      } else {
-        this.products2.push(this.editedItem)
-      }
-      const fd = new FormData()
-      console.log(this.products2[this.editedIndex])
-      for (const key in this.products2[this.editedIndex]) {
-        if (key !== '_id') {
-          fd.append(key, this.products2[this.editedIndex][key])
-        }
-      }
-      const { data } = await this.api.patch(
-        '/products2/' + this.products2[this.editedIndex]._id,
-        fd,
-        {
+        const { data } = await this.api.post('/board/' + this.form._id, { text: this.text, account: this.user.account }, {
           headers: {
             authorization: 'Bearer ' + this.user.token
           }
-        }
-      )
-      this.products2[this.form.index] = {
-        ...this.form,
-        image: data.result.image
+        })
+        console.log(data)
+        this.discuss = false
+      } catch (error) {
+        console.log(error)
       }
-      console.log('55')
-      this.$refs.table.refresh()
-      this.close()
+      this.sending = false
+      this.text = ''
     }
   },
   async created () {

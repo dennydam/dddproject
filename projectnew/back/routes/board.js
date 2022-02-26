@@ -4,6 +4,7 @@ import auth from '../middleware/auth.js'
 import upload from '../middleware/upload.js'
 import {
   create3,
+  create4,
   getProducts3,
   getAllProducts3,
   getProductById3,
@@ -14,6 +15,8 @@ import {
 const router = express.Router()
 
 router.post('/', auth, content('multipart/form-data'), upload, create3)
+router.post('/:id', auth, create4)
+
 router.get('/', getProducts3)
 router.get('/all', auth, getAllProducts3)
 router.get('/:id', getProductById3)
