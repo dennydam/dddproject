@@ -4,12 +4,15 @@
       <div id="section01">
         <v-row>
           <v-col cols="6" class="content1" align="center" justify="center">
+           <v-card
+               width="600">
             <v-img
-              width="500"
-              height="500"
+              width="600"
+              height="400"
               :src="image"
               title="YouTube video player"
             ></v-img>
+            </v-card>
           </v-col>
           <v-col cols="6" class="worktext" align="center" justify="center">
             <h1 class="mt-4">飲食說明</h1>
@@ -22,9 +25,13 @@
               </v-card>
 
           </v-col>
-          <v-col cols="6">
-            <v-form ref="form">
+          </v-row>
+          <v-row class="mt-10">
+          <v-col cols="1"></v-col>
+          <v-col cols="3" align="center" justify="center" >
+            <v-form ref="form" >
               <v-text-field
+               outlined
                 v-model.number="quantity"
                 type="number"
                 required
@@ -36,47 +43,10 @@
               <v-btn @click="addCart" >回去訓練頁</v-btn>
             </v-form>
           </v-col>
-        </v-row>
+          </v-row>
+
       </div>
     </v-container>
-    <v-footer class="mt-14" dark padless>
-      <v-card
-        color="primary"
-        flat
-        tile
-        class="indigo lighten-1 white--text text-center"
-      >
-        <v-card-text>
-          <v-btn
-            v-for="icon in icons"
-            :key="icon"
-            class="mx-4 white--text"
-            icon
-          >
-            <v-icon size="24px">
-              {{ icon }}
-            </v-icon>
-          </v-btn>
-        </v-card-text>
-
-        <v-card-text class="white--text pt-0">
-          Phasellus feugiat arcu sapien, et iaculis ipsum elementum sit amet.
-          Mauris cursus commodo interdum. Praesent ut risus eget metus luctus
-          accumsan id ultrices nunc. Sed at orci sed massa consectetur dignissim
-          a sit amet dui. Duis commodo vitae velit et faucibus. Morbi vehicula
-          lacinia malesuada. Nulla placerat augue vel ipsum ultrices, cursus
-          iaculis dui sollicitudin. Vestibulum eu ipsum vel diam elementum
-          tempor vel ut orci. Orci varius natoque penatibus et magnis dis
-          parturient montes, nascetur ridiculus mus.
-        </v-card-text>
-
-        <v-divider></v-divider>
-
-        <v-card-text class="white--text">
-          {{ new Date().getFullYear() }} — <strong>Vuetify</strong>
-        </v-card-text>
-      </v-card>
-    </v-footer>
   </v-main>
 </template>
 <script>

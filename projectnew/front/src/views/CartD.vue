@@ -105,7 +105,7 @@ export default {
   }
 }
 </script>
-<style scope>
+<style scoped>
 .table {
   width: 50%;
   margin: auto;

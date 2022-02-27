@@ -1,17 +1,16 @@
 <template>
-  <div>
+  <div class="top">
     <!-- <v-data-table class="table" :items="products" :fields='fields' :items-per-page="5">
     </v-data-table> -->
     <v-dialog
       id="modal-product"
-      :title="form._id.length > 0 ? '編輯商品' : '新增商品'"
       v-model="dialog1"
       persistent
       @click="resetForm"
       max-width="600"
       hide-overlay="false"
     >
-      <template v-slot:activator="{ on, attrs }">
+     <template v-slot:activator="{ on, attrs }">
         <v-btn
           class="additem"
           color="primary"
@@ -36,7 +35,6 @@
           >
           </v-text-field>
         </v-form>
-
         <v-form ref="form">
           <v-text-field
             v-model.number="form.price"
@@ -45,16 +43,6 @@
             required
             placeholder="請輸入商品價格"
             :state="state.price"
-            outlined
-          >
-          </v-text-field>
-        </v-form>
-
-        <v-form ref="form">
-          <v-text-field
-            v-model="form.video"
-            required
-            placeholder="請輸入影片網址"
             outlined
           >
           </v-text-field>
@@ -118,7 +106,6 @@
         class="elevation-1 mt-16"
       >
         <template v-slot:[`item.imag`]="{ item }">
-          {{ item }}
           <img :src="item.image" style="width: 100px" />
         </template>
         <template v-slot:top>
@@ -278,13 +265,12 @@ export default {
       dialogDelete: false,
       headers: [
         {
-          text: 'Dessert (100g serving)',
+          text: '菜單',
           align: 'start',
           sortable: false,
           value: 'name'
         },
         { text: 'Calories', value: 'price' },
-        { text: 'Fat (g)', value: 'category' },
         { text: 'Carbs (g)', value: 'imag' },
         { text: 'Actions', value: 'actions', sortable: false }
       ],
@@ -472,10 +458,8 @@ export default {
     // },
     async editItem (item) {
       this.editedIndex = this.products.indexOf(item)
-      console.log(this.products.indexOf(item))
-      console.log(item)
-      this.form.name = this.products[this.editedIndex].name
-      this.dialog1 = true
+      this.editedItem = Object.assign({}, item)
+      this.dialog = true
     },
     closeDelete () {
       this.dialogDelete = false
@@ -490,8 +474,14 @@ export default {
       this.dialogDelete = true
     },
     async deleteItemConfirm () {
-      this.products.splice(this.editedIndex, 1)
+      console.log(this.products)
       this.closeDelete()
+      // const fd = new FormData()
+      // for (const key in this.products[this.editedIndex]) {
+      //   if (key !== '_id') {
+      //     fd.append(key, this.products[this.editedIndex][key])
+      //   }
+      // }
       try {
         await this.api.delete(
           '/products/' + this.products[this.editedIndex]._id,
@@ -505,6 +495,7 @@ export default {
         console.log(error)
         alert('刪除失敗')
       }
+      this.products.splice(this.editedIndex, 1)
     },
     close () {
       this.dialog = false
@@ -514,6 +505,7 @@ export default {
       })
     },
     async save () {
+      console.log(this.products)
       if (this.editedIndex > -1) {
         Object.assign(this.products[this.editedIndex], this.editedItem)
       } else {
@@ -564,18 +556,21 @@ export default {
 }
 </script>
 <style scoped>
-.table {
-  margin-top: 600px;
-}
 
 .container {
-  max-width: 1000px;
+  max-width: 1500px;
+}
+
+.top{
+  position: absolute;
+  left:25%;
+  width: 60%;
 }
 
 .additem {
-  position: absolute;
-  left: 620px;
-  top: 50px;
+
+  left: 300px;
+  top:130px;
   z-index: 22;
 }
 </style>

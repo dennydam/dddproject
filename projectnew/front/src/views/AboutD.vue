@@ -39,7 +39,18 @@
                     >
                       <v-card-title v-text="product.name"></v-card-title>
                     </v-img>
-                    <v-card-text v-text="product.description"> </v-card-text>
+                    <v-btn icon @click="show = !show">
+                  <v-icon>{{
+                    show ? 'mdi-chevron-up' : 'mdi-chevron-down'
+                  }}</v-icon>
+                </v-btn>
+                <v-expand-transition>
+                  <div v-show="show">
+                    <v-divider></v-divider>
+
+                    <v-card-text v-text="product.description"></v-card-text>
+                  </div>
+                </v-expand-transition>
                     <v-divider class="mx-4"></v-divider>
                     <v-card-actions>
                       <v-spacer></v-spacer>
@@ -194,45 +205,7 @@
     </div> -->
       <!-- test -->
     </div>
-    <!-- footer -->
-    <v-footer dark padless>
-      <v-card
-        color="primary"
-        flat
-        tile
-        class="indigo lighten-1 white--text text-center"
-      >
-        <v-card-text>
-          <v-btn
-            v-for="icon in icons"
-            :key="icon"
-            class="mx-4 white--text"
-            icon
-          >
-            <v-icon size="24px">
-              {{ icon }}
-            </v-icon>
-          </v-btn>
-        </v-card-text>
 
-        <v-card-text class="white--text pt-0">
-          Phasellus feugiat arcu sapien, et iaculis ipsum elementum sit amet.
-          Mauris cursus commodo interdum. Praesent ut risus eget metus luctus
-          accumsan id ultrices nunc. Sed at orci sed massa consectetur dignissim
-          a sit amet dui. Duis commodo vitae velit et faucibus. Morbi vehicula
-          lacinia malesuada. Nulla placerat augue vel ipsum ultrices, cursus
-          iaculis dui sollicitudin. Vestibulum eu ipsum vel diam elementum
-          tempor vel ut orci. Orci varius natoque penatibus et magnis dis
-          parturient montes, nascetur ridiculus mus.
-        </v-card-text>
-
-        <v-divider></v-divider>
-
-        <v-card-text class="white--text">
-          {{ new Date().getFullYear() }} — <strong>Vuetify</strong>
-        </v-card-text>
-      </v-card>
-    </v-footer>
   </div>
 </template>
 <script>
@@ -290,56 +263,6 @@ export default {
       //   },
       //   { text: 'eeeeeee' }
       // ],
-      foods: [
-        [
-          {
-            title: '胸部訓練',
-            text: 'dddd',
-            src: 'https://cdn.vuetifyjs.com/images/cards/house.jpg',
-            flex: 3
-          },
-          {
-            title: 'Favorite road trip',
-            src: 'https://cdn.vuetifyjs.com/images/cards/road.jpg',
-            flex: 3
-          },
-          {
-            title: '肩部訓練',
-            src: 'https://images.unsplash.com/photo-1526506118085-60ce8714f8c5?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8Mnx8d29ya291dHxlbnwwfHwwfHw%3D&auto=format&fit=crop&w=500&q=60',
-            flex: 3
-          },
-          {
-            title: '背部訓練',
-            src: 'https://images.unsplash.com/photo-1611841315886-a8ad8d02f179?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MTM1fHx3b3Jrb3V0fGVufDB8fDB8fA%3D%3D&auto=format&fit=crop&w=500&q=60',
-            flex: 3
-          },
-          { text: 'eeeeeee' }
-        ],
-        [
-          {
-            title: '胸部訓練2',
-            text: 'dddd',
-            src: 'https://cdn.vuetifyjs.com/images/cards/house.jpg',
-            flex: 3
-          },
-          {
-            title: 'Favorite road trip2',
-            src: 'https://cdn.vuetifyjs.com/images/cards/road.jpg',
-            flex: 3
-          },
-          {
-            title: '肩部訓練2',
-            src: 'https://images.unsplash.com/photo-1526506118085-60ce8714f8c5?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8Mnx8d29ya291dHxlbnwwfHwwfHw%3D&auto=format&fit=crop&w=500&q=60',
-            flex: 3
-          },
-          {
-            title: '背部訓練2',
-            src: 'https://images.unsplash.com/photo-1611841315886-a8ad8d02f179?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MTM1fHx3b3Jrb3V0fGVufDB8fDB8fA%3D%3D&auto=format&fit=crop&w=500&q=60',
-            flex: 3
-          },
-          { text: 'eeeeeee' }
-        ]
-      ],
       icons: ['mdi-facebook', 'mdi-twitter', 'mdi-linkedin', 'mdi-instagram']
     }
   },

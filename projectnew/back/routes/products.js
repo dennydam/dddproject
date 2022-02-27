@@ -19,5 +19,5 @@ router.get('/', getProducts)
 router.get('/all', auth, admin, getAllProducts)
 router.get('/:id', getProductById)
 router.patch('/:id', auth, admin, content('multipart/form-data'), upload, updateProductById)
-router.delete('/:id', auth, admin, upload, delProducts)
+router.delete('/:id', auth, admin, delProducts)
 export default router

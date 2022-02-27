@@ -93,13 +93,14 @@
                 >
 
                   <v-card max-width="250">
-                      <v-card-title v-text="item.name"></v-card-title>
+                    <h1>主題:{{ products2[index].name }}</h1>
+                      <v-card-title >{{ item.name }}</v-card-title>
                     <v-card-text v-text="products2[index].description"> </v-card-text>
                     <v-divider class="mx-4"></v-divider>
                     <v-card-actions>
                       <v-spacer></v-spacer>
                       <v-btn
-                        @click ="discussopen(item)">cc
+                        @click ="discussopen()">cc
                       </v-btn>
                     </v-card-actions>
                   </v-card>
@@ -108,14 +109,18 @@
                     v-model="discuss"
                       >
                     <v-card
+
                     >
                     <v-card-text>
-                    <h1>主題:{{ form.name }}</h1>
+                    <h1>主題:{{ products2[index].name }}</h1>
                     <v-divider class="mx-4 my-4"></v-divider>
                      <p>描述:{{ form.description }}</p>
                      <v-divider class="mx-4 my-4"></v-divider>
                      <p>{{ user.account }}</p>
                      </v-card-text>
+
+                      <v-card-text></v-card-text>
+
                      <v-text-field
                        v-model="text"
                        outlined
@@ -127,6 +132,7 @@
                     </v-card>
 
                        </v-dialog>
+                        <h1>{{ products2[index].name }}</h1>
 
                 </v-col>
 
@@ -171,10 +177,12 @@ export default {
       text: '',
       modalSubmitting: false,
       products2: [],
+      message: [],
       form: {
         name: '',
         description: '',
-        _id: ''
+        _id: '',
+        message: ''
       },
       // editProduct (index) {
       //   this.form = {
@@ -254,14 +262,15 @@ export default {
         })
       }
     },
-    discussopen (item) {
-      console.log(item)
+    discussopen (index) {
+      // console.log(item)
       this.discuss = true
-      this.form.name = item.name
-      this.form._id = item._id
-      this.form.description = item.description
-      console.log(this.products2)
-      // this.form = item
+    //   this.form.name = item.name
+    //   this.form._id = item._id
+    //   this.form.description = item.description
+    //   this.form.message = item.message[0]
+    //   console.log(this.products2)
+    //   this.form = item
     },
     async sendmessage () {
       try {

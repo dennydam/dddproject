@@ -91,6 +91,7 @@
       </v-col>
       <v-col>
         <p>您的TDEE:{{ TDEE }}</p>
+        <p>您的BMR:{{ BMR }}</p>
       </v-col>
     </v-row>
   </div>
@@ -102,6 +103,7 @@ import { Metabolism } from '../../node_modules/tdee-calculator/src/index.js'
 export default {
   data: () => ({
     TDEE: '',
+    BMR: '',
     form: {
       sex: '',
       age: 0,
@@ -150,6 +152,7 @@ export default {
       console.log(woman.BMR()) // Basal Metabolism Rate: 1616 calories per day
       console.log(woman.TDEE()) // Total Daily Energy Expenditure: 2222 calories per da
       this.TDEE = woman.TDEE()
+      this.BMR = woman.BMR()
     }
   }
 }

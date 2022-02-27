@@ -123,7 +123,7 @@
           </div>
         </div>
     </section>
-    <v-footer padless>
+    <!-- <v-footer padless>
       <v-card
         color="primary"
         flat
@@ -160,7 +160,7 @@
           {{ new Date().getFullYear() }} — <strong>Vuetify</strong>
         </v-card-text>
       </v-card>
-    </v-footer>
+    </v-footer> -->
 
     <router-view />
   </v-main>

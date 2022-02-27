@@ -154,6 +154,38 @@
 
       <router-view />
     </v-main>
+     <v-footer padless>
+      <v-card
+        color="primary"
+        flat
+        tile
+        class="indigo lighten-1 white--text text-center"
+        width="100%"
+      >
+        <v-card-text>
+          <v-btn
+            v-for="icon in icons"
+            :key="icon"
+            class="mx-4 white--text"
+            icon
+          >
+            <v-icon size="24px">
+              {{ icon }}
+            </v-icon>
+          </v-btn>
+        </v-card-text>
+
+        <v-card-text class="white--text pt-0">
+        Copyright © 2020  TAIWAN reserved.
+        </v-card-text>
+
+        <v-divider></v-divider>
+
+        <v-card-text class="white--text">
+          {{ new Date().getFullYear() }} — <strong>Vuetify</strong>
+        </v-card-text>
+      </v-card>
+    </v-footer>
   </v-app>
 </template>
 
@@ -188,6 +220,7 @@ export default {
       },
       { index: '3', icon: 'warning', title: '管理者', url: '/admin' }
     ],
+    icons: ['mdi-facebook', 'mdi-twitter', 'mdi-linkedin', 'mdi-instagram'],
     dialog: false,
     dialog2: false,
     valid: true,

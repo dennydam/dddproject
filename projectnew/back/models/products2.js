@@ -5,11 +5,6 @@ const productSchema2 = new mongoose.Schema({
     type: String,
     required: [true, '商品名不能為空']
   },
-  price: {
-    type: Number,
-    min: [0, '價格格式不正確'],
-    required: [true, '商品價格不能為空']
-  },
   image: {
     type: String
   },

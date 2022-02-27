@@ -1,10 +1,9 @@
 <template>
-  <div>
+  <div class="top">
     <!-- <v-data-table class="table" :items="products2" :fields='fields' :items-per-page="5">
     </v-data-table> -->
     <v-dialog
       id="modal-product"
-      :title="form._id.length > 0 ? '編輯商品' : '新增商品'"
       v-model="dialog1"
       persistent
       @click="resetForm"
@@ -32,19 +31,6 @@
             required
             placeholder="請輸入商品名稱"
             :state="state.name"
-            outlined
-          >
-          </v-text-field>
-        </v-form>
-
-        <v-form ref="form">
-          <v-text-field
-            v-model.number="form.price"
-            type="number"
-            min="0"
-            required
-            placeholder="請輸入商品價格"
-            :state="state.price"
             outlined
           >
           </v-text-field>
@@ -114,7 +100,7 @@
         :headers="headers"
         :items="products2"
         sort-by="calories"
-        class="elevation-1"
+        class="elevation-1 mt-16"
       >
         <template v-slot:[`item.imag`]="{ item }">
           <img :src="item.image" style="width: 100px" />
@@ -146,13 +132,7 @@
                       </v-col>
                       <v-col cols="12" sm="6" md="4">
                         <v-text-field
-                          v-model="editedItem.price"
-                          label="price"
-                        ></v-text-field>
-                      </v-col>
-                      <v-col cols="12" sm="6" md="4">
-                        <v-text-field
-                          v-model="editedItem.price"
+                          v-model="editedItem.image"
                           label="Fat (g)"
                         ></v-text-field>
                       </v-col>
@@ -161,7 +141,7 @@
                     </v-col> -->
                       <v-col cols="12" sm="6" md="4">
                         <v-text-field
-                          v-model="editedItem.protein"
+                          v-model="editedItem.video"
                           label="Protein (g)"
                         ></v-text-field>
                       </v-col>
@@ -284,29 +264,20 @@ export default {
       editedIndex: -1,
       editedItem: {
         name: '',
-        price: 0,
-        category: '',
-        calories: 0,
-        fat: 0,
-        carbs: 0,
-        protein: 0
+        image: '',
+        video: ''
       },
       defaultItem: {
         name: '',
-        price: 0,
-        category: '',
-        calories: 0,
-        fat: 0,
-        carbs: 0,
-        protein: 0
+        image: '',
+        video: ''
       }
     }
   },
   computed: {
     state () {
       return {
-        name: this.form.name.length === 0 ? null : true,
-        price: this.form.price === null ? null : this.form.price >= 0
+        name: this.form.name.length === 0 ? null : true
       }
     },
     formTitle () {
@@ -328,7 +299,7 @@ export default {
 
   methods: {
     async submitModal () {
-      if (!this.state.name || !this.state.price) {
+      if (!this.state.name) {
         return
       }
       this.modalSubmitting = true
@@ -466,10 +437,8 @@ export default {
     // },
     async editItem (item) {
       this.editedIndex = this.products2.indexOf(item)
-      console.log(this.products2.indexOf(item))
-      console.log(item)
-      this.form.name = this.products2[this.editedIndex].name
-      this.dialog1 = true
+      this.editedItem = Object.assign({}, item)
+      this.dialog = true
     },
     closeDelete () {
       this.dialogDelete = false
@@ -483,9 +452,11 @@ export default {
       this.editedItem = Object.assign({}, item)
       this.dialogDelete = true
     },
-    async deleteItemConfirm () {
+    async deleteItemConfirm (item) {
+      this.editedIndex = this.products2.indexOf(item)
       this.products2.splice(this.editedIndex, 1)
       this.closeDelete()
+      console.log(this.products2[this.editedIndex])
       try {
         await this.api.delete(
           '/products2/' + this.products2[this.editedIndex]._id,
@@ -558,18 +529,20 @@ export default {
 }
 </script>
 <style scoped>
-.table {
-  margin-top: 500px;
+.container {
+  max-width: 1500px;
 }
 
-.container {
-  max-width: 1000px;
+.top{
+  position: absolute;
+  left:25%;
+  width: 60%;
 }
 
 .additem {
-  position: absolute;
-  left: 620px;
-  top: 25px;
+
+  left: 300px;
+  top:130px;
   z-index: 22;
 }
 </style>

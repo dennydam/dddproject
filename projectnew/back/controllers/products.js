@@ -79,12 +79,14 @@ export const updateProductById = async (req, res) => {
 export const delProducts = async (req, res) => {
   try {
     const result = await products.findByIdAndDelete(req.params.id)
+    console.log('666')
     if (result) {
       res.status(200).send({ success: true, message: '' })
     } else {
       res.status(404).send({ success: false, message: '查無帳號' })
     }
   } catch (error) {
+    console.log(error)
     if (error.name === 'CastError') {
       res.status(404).send({ success: false, message: '查無帳號' })
     } else {

@@ -19,9 +19,6 @@ const productSchema = new mongoose.Schema({
   sell: {
     type: Boolean,
     default: false
-  },
-  video: {
-    type: String
   }
 }, { versionKey: false })
 
