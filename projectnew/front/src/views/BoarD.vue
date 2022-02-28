@@ -6,9 +6,7 @@
       id="modal-product"
       v-model="dialog1"
       persistent
-      @click="resetForm"
       max-width="600"
-      hide-overlay="false"
     >
       <template v-slot:activator="{ on, attrs }">
         <v-btn
@@ -93,33 +91,38 @@
                 >
 
                   <v-card max-width="250">
-                    <h1>主題:{{ products2[index].name }}</h1>
+                    <h1>主題:{{ item.name}}</h1>
                       <v-card-title >{{ item.name }}</v-card-title>
                     <v-card-text v-text="products2[index].description"> </v-card-text>
                     <v-divider class="mx-4"></v-divider>
                     <v-card-actions>
                       <v-spacer></v-spacer>
                       <v-btn
-                        @click ="discussopen()">cc
+                        @click ="discussopen(item)">cc
                       </v-btn>
                     </v-card-actions>
                   </v-card>
                    <v-dialog
-                   max-width="600"
+                   max-width="900"
                     v-model="discuss"
                       >
-                    <v-card
-
-                    >
+                      <v-card mt-10>
+                      <v-toolbar
+                          color="primary"
+                          dark
+                        > <h1>主題:{{ form.name }}</h1>
+                        </v-toolbar>
                     <v-card-text>
-                    <h1>主題:{{ products2[index].name }}</h1>
-                    <v-divider class="mx-4 my-4"></v-divider>
                      <p>描述:{{ form.description }}</p>
                      <v-divider class="mx-4 my-4"></v-divider>
-                     <p>{{ user.account }}</p>
+                      <p>{{form.account}}:{{form.messages}}</p>
+                      <p>{{form.account1}}:{{form.messages1}}</p>
+                      <v-col>
+                         <v-card-text>
+                           <p>88888888888888888888888</p>
+                         </v-card-text>
+                         </v-col>
                      </v-card-text>
-
-                      <v-card-text></v-card-text>
 
                      <v-text-field
                        v-model="text"
@@ -129,10 +132,9 @@
                        >
 
                      </v-text-field>
-                    </v-card>
+                     </v-card>
 
                        </v-dialog>
-                        <h1>{{ products2[index].name }}</h1>
 
                 </v-col>
 
@@ -177,12 +179,11 @@ export default {
       text: '',
       modalSubmitting: false,
       products2: [],
-      message: [],
+
       form: {
         name: '',
         description: '',
-        _id: '',
-        message: ''
+        _id: ''
       },
       // editProduct (index) {
       //   this.form = {
@@ -238,15 +239,6 @@ export default {
           })
           this.products2.push(data.result)
           this.dialog1 = false
-        } else {
-          await this.api.patch('/board/' + this.form._id, fd, {
-            headers: {
-              authorization: 'Bearer ' + this.user.token
-            }
-          })
-          this.products2[this.form.index] = {
-            ...this.form
-          }
         }
         this.modalSubmitting = false
         this.form = {
@@ -262,15 +254,15 @@ export default {
         })
       }
     },
-    discussopen (index) {
-      // console.log(item)
+    async discussopen (item) {
       this.discuss = true
-    //   this.form.name = item.name
-    //   this.form._id = item._id
-    //   this.form.description = item.description
-    //   this.form.message = item.message[0]
-    //   console.log(this.products2)
-    //   this.form = item
+      this.form.name = item.name
+      this.form._id = item._id
+      this.form.description = item.description
+      this.form.messages = item.messages[0].text
+      this.form.account = item.messages[0].account
+      this.form.messages1 = item.messages[1].text
+      this.form.account1 = item.messages[1].account
     },
     async sendmessage () {
       try {
@@ -307,7 +299,7 @@ export default {
   }
 }
 </script>
-<style>
+<style scoped>
 .table {
   margin-top: 500px;
 }

@@ -26,7 +26,7 @@
             :items="items"
             type="text"
             required
-            placeholder="請輸入商品名稱"
+            placeholder="請輸入性別"
             outlined
           >
           </v-select>
@@ -39,7 +39,8 @@
             v-model="form.age"
             type="number"
             required
-            placeholder="請輸入商品名稱"
+            placeholder="請輸入您的年齡"
+            label="請輸入您的年齡"
             outlined
           >
           </v-text-field>
@@ -52,7 +53,8 @@
             v-model="form.height"
             type="number"
             required
-            placeholder="請輸入商品名稱"
+            placeholder="請輸入您的身高"
+            label="請輸入您的身高"
             outlined
           >
           </v-text-field>
@@ -65,7 +67,8 @@
             v-model="form.weight"
             type="number"
             required
-            placeholder="請輸入商品名稱"
+            placeholder="請輸入您的體重"
+            label="請輸入您的體重"
             outlined
           >
           </v-text-field>
@@ -78,7 +81,7 @@
             :items="items2"
             type="text"
             required
-            placeholder="請輸入商品名稱"
+            placeholder="請輸入您的運動頻率"
             outlined
           >
           </v-select>
@@ -157,7 +160,7 @@ export default {
   }
 }
 </script>
-<style>
+<style scoped>
 .container {
   max-width: 800px;
 }

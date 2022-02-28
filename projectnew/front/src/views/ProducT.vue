@@ -96,7 +96,7 @@ export default {
   }
 }
 </script>
-<style>
+<style scoped>
 .v-main {
   padding: 123px 0px 0px;
 }

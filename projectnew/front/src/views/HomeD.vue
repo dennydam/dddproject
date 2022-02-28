@@ -4,7 +4,7 @@
       <div class="content1">
         <video
           class="dd"
-          src="../assets/pexels-mikhail-nilov-7699870.mp4"
+          src="../assets/pexels-tima-miroshnichenko-6388436.mp4"
           autoplay="autoplay"
           muted="muted"
           loop="loop"
@@ -48,7 +48,7 @@
         <v-col cols="6" sm="4" class="img1">
           <v-img
             class="animate__animated animate__bounce animate__delay-1s"
-            src="https://go180.nl/app/uploads/2021/05/GO180-Groningen_36.jpg"
+            src="https://images.unsplash.com/photo-1598136490941-30d885318abd?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MTl8fHdvcmtvdXR8ZW58MHx8MHx8&auto=format&fit=crop&w=500&q=60"
             width="300px"
           >
             <div class="fill-height bottom-gradient"></div>
@@ -252,9 +252,10 @@
   font-size: 5rem;
   color: white;
 }
-// #section04
-//   margin-top: -200px
-//
+#section04{
+  margin-bottom: 200px;
+}
+
 </style>
 
 <script>

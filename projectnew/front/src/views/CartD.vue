@@ -2,8 +2,9 @@
 <template>
   <v-container>
     <div class="table">
-      <p>總熱量 {{ total }}</p>
-      <v-simple-table>
+      <h1>總熱量 {{ total }} 大卡 </h1>
+      <v-divider class="mx-4"></v-divider>
+      <v-simple-table class="elevation-1" >
         <template v-slot:default>
           <thead>
             <tr>
@@ -107,7 +108,8 @@ export default {
 </script>
 <style scoped>
 .table {
-  width: 50%;
+  border-radius: 10px ;
+  width: 80%;
   margin: auto;
   margin-top: 200px;
 }

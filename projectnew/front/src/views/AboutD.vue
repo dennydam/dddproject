@@ -13,14 +13,14 @@
           <h1>訓練清單</h1>
           <v-divider class="mx-4 my-4"></v-divider>
 
-          <v-tabs v-model="tab" class="mb-4" background-color="#dde0d9" dark>
+          <v-tabs v-model="tab" class="mb-4 tab" background-color="#dde0d9" >
             <v-tab v-for="item in items" :key="item.tab">
               {{ item.tab }}
             </v-tab>
           </v-tabs>
 
-          <v-tabs-items v-model="tab">
-            <v-tab-item v-for="item in items" :key="item.tab" class="ccc">
+          <v-tabs-items v-model="tab"  class="dd" background-color="#dde0d9">
+            <v-tab-item  v-for="item in items" :key="item.tab" class="ccc" >
               <v-row>
                 <v-col
                   cols="12"
@@ -84,7 +84,7 @@
               lg="3"
               xl="3"
             >
-              <v-card max-width="270">
+              <v-card max-width="250">
                 <v-img
                   :src="product.image"
                   class="white--text align-end"
@@ -291,12 +291,21 @@ export default {
 }
 </script>
 <style lang="scss" scoped>
-.card {
-  max-width: 20%;
+// .card {
+//   max-width: 20%;
+// }
+
+.tab{
+  width: 70%;
 }
 
 .aaa {
   max-width: 70%;
+}
+
+#section01{
+  height: 1200px;
+  background-color: #dde0d9;
 }
 
 .container01 {
@@ -307,9 +316,28 @@ export default {
 
 .ccc {
   background-color: #dde0d9;
+  z-index: 11;
+}
+
+.dd{
+  width: 80%;
 }
 
 .footer {
   padding: 22px;
+}
+
+// .v-main__wrap {
+//     flex: 1 1 auto;
+//     max-width: 200%;
+//     position: relative;
+// }
+
+@media screen and (max-width: 500px) {
+ #section01{
+  height: 1800px;
+  background-color: #dde0d9;
+}
+
 }
 </style>

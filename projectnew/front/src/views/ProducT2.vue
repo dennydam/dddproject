@@ -18,6 +18,19 @@
       <v-col cols="6" align="center" justify="center">
         <v-btn to="/">回去訓練頁</v-btn>
       </v-col>
+        <v-form ref="form" >
+              <v-text-field
+               outlined
+                v-model.number="quantity"
+                type="number"
+                required
+                :state="quantityState"
+                min="0"
+              >
+              </v-text-field>
+              <v-btn class="mr-10" @click="addCart">加入訓練菜單</v-btn>
+              <v-btn @click="addCart" >回去訓練頁</v-btn>
+            </v-form>
     </v-row>
 
   </div>
