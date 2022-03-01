@@ -23,74 +23,76 @@
         </v-btn>
       </template>
       <v-card>
-        <v-form ref="form">
-          <v-text-field
-            label="商品名稱"
-            v-model="form.name"
-            type="text"
-            required
-            placeholder="請輸入商品名稱"
-            :state="state.name"
-            outlined
-          >
-          </v-text-field>
-        </v-form>
+        <v-container>
+          <v-form ref="form">
+            <v-text-field
+              label="商品名稱"
+              v-model="form.name"
+              type="text"
+              required
+              placeholder="請輸入商品名稱"
+              :state="state.name"
+              outlined
+            >
+            </v-text-field>
+          </v-form>
 
-        <v-form ref="form">
-          <v-text-field
-            v-model="form.video"
-            required
-            placeholder="請輸入影片網址"
-            outlined
-          >
-          </v-text-field>
-        </v-form>
+          <v-form ref="form">
+            <v-text-field
+              v-model="form.video"
+              required
+              placeholder="請輸入影片網址"
+              outlined
+            >
+            </v-text-field>
+          </v-form>
 
-        <v-form ref="form">
-          <v-textarea
-            v-model="form.description"
-            :state="state.description"
-            required
-            rows="3"
-            max-rows="6"
-            placeholder="請輸入商品說明"
-            color="teal"
-          >
-          </v-textarea>
-        </v-form>
-        <v-radio-group v-model="form.sell" mandatory row>
-          <v-radio :value="true" label="上架">上架</v-radio>
-          <v-radio label="下架" :value="false">下嫁</v-radio>
-        </v-radio-group>
-        <v-row align="center" justify="center" no-gutters>
-          <img-inputer
-            class="inputer"
-            v-model="form.image"
-            accept="image/*"
-            theme="light"
-            size="large"
-            bottom-text="點選或拖拽圖片以修改"
-            hover-text="點選或拖拽圖片以修改"
-            placeholder="點選或拖拽選擇圖片"
-            :max-size="1000"
-            exceed-size-text="檔案大小不能超過"
-          />
-        </v-row>
+          <v-form ref="form">
+            <v-textarea
+              v-model="form.description"
+              :state="state.description"
+              required
+              rows="3"
+              max-rows="6"
+              placeholder="請輸入商品說明"
+              color="teal"
+            >
+            </v-textarea>
+          </v-form>
+          <v-radio-group v-model="form.sell" mandatory row>
+            <v-radio :value="true" label="上架">上架</v-radio>
+            <v-radio label="下架" :value="false">下嫁</v-radio>
+          </v-radio-group>
+          <v-row align="center" justify="center" no-gutters>
+            <img-inputer
+              class="inputer"
+              v-model="form.image"
+              accept="image/*"
+              theme="light"
+              size="large"
+              bottom-text="點選或拖拽圖片以修改"
+              hover-text="點選或拖拽圖片以修改"
+              placeholder="點選或拖拽選擇圖片"
+              :max-size="1000"
+              exceed-size-text="檔案大小不能超過"
+            />
+          </v-row>
 
-        <v-card-actions>
-          <v-spacer></v-spacer>
-          <v-btn
-            color="green darken-1"
-            text
-            @click="submitModal"
-            :disabled="modalSubmitting"
-          >
-            送出
-          </v-btn>
-          <v-btn color="green darken-1" text @click="dialog1 = false">
-            取消
-          </v-btn>
-        </v-card-actions>
+          <v-card-actions>
+            <v-spacer></v-spacer>
+            <v-btn
+              color="green darken-1"
+              text
+              @click="submitModal"
+              :disabled="modalSubmitting"
+            >
+              送出
+            </v-btn>
+            <v-btn color="green darken-1" text @click="dialog1 = false">
+              取消
+            </v-btn>
+          </v-card-actions>
+        </v-container>
       </v-card>
     </v-dialog>
     <!-- table -->
@@ -533,16 +535,15 @@ export default {
   max-width: 1500px;
 }
 
-.top{
+.top {
   position: absolute;
-  left:25%;
+  left: 25%;
   width: 60%;
 }
 
 .additem {
-
   left: 300px;
-  top:130px;
+  top: 130px;
   z-index: 22;
 }
 </style>

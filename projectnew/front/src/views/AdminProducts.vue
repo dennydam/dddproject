@@ -10,7 +10,7 @@
       max-width="600"
       hide-overlay="false"
     >
-     <template v-slot:activator="{ on, attrs }">
+      <template v-slot:activator="{ on, attrs }">
         <v-btn
           class="additem"
           color="primary"
@@ -23,43 +23,45 @@
         </v-btn>
       </template>
       <v-card>
-        <v-form ref="form">
-          <v-text-field
-            label="商品名稱"
-            v-model="form.name"
-            type="text"
-            required
-            placeholder="請輸入商品名稱"
-            :state="state.name"
-            outlined
-          >
-          </v-text-field>
-        </v-form>
-        <v-form ref="form">
-          <v-text-field
-            v-model.number="form.price"
-            type="number"
-            min="0"
-            required
-            placeholder="請輸入商品價格"
-            :state="state.price"
-            outlined
-          >
-          </v-text-field>
-        </v-form>
+        <v-container>
+          <v-form ref="form">
+            <v-text-field
+              label="商品名稱"
+              v-model="form.name"
+              type="text"
+              required
+              placeholder="請輸入商品名稱"
+              :state="state.name"
+              outlined
+            >
+            </v-text-field>
+          </v-form>
+          <v-form ref="form">
+            <v-text-field
+              v-model.number="form.price"
+              type="number"
+              min="0"
+              required
+              placeholder="請輸入商品價格"
+              :state="state.price"
+              outlined
+            >
+            </v-text-field>
+          </v-form>
 
-        <v-form ref="form">
-          <v-textarea
-            v-model="form.description"
-            :state="state.description"
-            required
-            rows="3"
-            max-rows="6"
-            placeholder="請輸入商品說明"
-            color="teal"
-          >
-          </v-textarea>
-        </v-form>
+          <v-form ref="form">
+            <v-textarea
+              v-model="form.description"
+              :state="state.description"
+              required
+              rows="3"
+              max-rows="6"
+              placeholder="請輸入商品說明"
+              color="teal"
+            >
+            </v-textarea>
+          </v-form>
+        </v-container>
 
         <v-radio-group v-model="form.sell" mandatory>
           <v-radio :value="true" label="上架">上架</v-radio>
@@ -556,21 +558,19 @@ export default {
 }
 </script>
 <style scoped>
-
 .container {
   max-width: 1500px;
 }
 
-.top{
+.top {
   position: absolute;
-  left:25%;
+  left: 25%;
   width: 60%;
 }
 
 .additem {
-
   left: 300px;
-  top:130px;
+  top: 130px;
   z-index: 22;
 }
 </style>

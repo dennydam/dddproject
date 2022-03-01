@@ -10,17 +10,20 @@
     <div id="section01">
       <div class="container01">
         <v-container class="aaa">
-          <h1>訓練清單</h1>
+          <div class="d-flex">
+            <h1>訓練清單</h1>
+            <v-icon class="ml-6" color="black darken-2" size="50"> mdi-weight-lifter</v-icon>
+          </div>
           <v-divider class="mx-4 my-4"></v-divider>
 
-          <v-tabs v-model="tab" class="mb-4 tab" background-color="#dde0d9" >
+          <v-tabs v-model="tab" class="mb-4 tab" background-color="#dde0d9">
             <v-tab v-for="item in items" :key="item.tab">
               {{ item.tab }}
             </v-tab>
           </v-tabs>
 
-          <v-tabs-items v-model="tab"  class="dd" background-color="#dde0d9">
-            <v-tab-item  v-for="item in items" :key="item.tab" class="ccc" >
+          <v-tabs-items v-model="tab" class="dd" background-color="#dde0d9">
+            <v-tab-item v-for="item in items" :key="item.tab" class="ccc">
               <v-row>
                 <v-col
                   cols="12"
@@ -40,17 +43,17 @@
                       <v-card-title v-text="product.name"></v-card-title>
                     </v-img>
                     <v-btn icon @click="show = !show">
-                  <v-icon>{{
-                    show ? 'mdi-chevron-up' : 'mdi-chevron-down'
-                  }}</v-icon>
-                </v-btn>
-                <v-expand-transition>
-                  <div v-show="show">
-                    <v-divider></v-divider>
+                      <v-icon>{{
+                        show ? 'mdi-chevron-up' : 'mdi-chevron-down'
+                      }}</v-icon>
+                    </v-btn>
+                    <v-expand-transition>
+                      <div v-show="show">
+                        <v-divider></v-divider>
 
-                    <v-card-text v-text="product.description"></v-card-text>
-                  </div>
-                </v-expand-transition>
+                        <v-card-text v-text="product.description"></v-card-text>
+                      </div>
+                    </v-expand-transition>
                     <v-divider class="mx-4"></v-divider>
                     <v-card-actions>
                       <v-spacer></v-spacer>
@@ -205,7 +208,6 @@
     </div> -->
       <!-- test -->
     </div>
-
   </div>
 </template>
 <script>
@@ -295,7 +297,7 @@ export default {
 //   max-width: 20%;
 // }
 
-.tab{
+.tab {
   width: 70%;
 }
 
@@ -303,7 +305,7 @@ export default {
   max-width: 70%;
 }
 
-#section01{
+#section01 {
   height: 1200px;
   background-color: #dde0d9;
 }
@@ -319,7 +321,7 @@ export default {
   z-index: 11;
 }
 
-.dd{
+.dd {
   width: 80%;
 }
 
@@ -334,10 +336,9 @@ export default {
 // }
 
 @media screen and (max-width: 500px) {
- #section01{
-  height: 1800px;
-  background-color: #dde0d9;
-}
-
+  #section01 {
+    height: 1800px;
+    background-color: #dde0d9;
+  }
 }
 </style>

@@ -1,7 +1,6 @@
 import board from '../models/board.js'
 
 export const create4 = async (req, res) => {
-  console.log(req.body)
   try {
     const result = await board.findByIdAndUpdate(req.params.id, {
       $push: {

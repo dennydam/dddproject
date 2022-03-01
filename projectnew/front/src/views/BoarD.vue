@@ -2,12 +2,7 @@
   <v-app>
     <!-- <v-data-table class="table" :items="products2" :fields='fields' :items-per-page="5">
     </v-data-table> -->
-    <v-dialog
-      id="modal-product"
-      v-model="dialog1"
-      persistent
-      max-width="600"
-    >
+    <v-dialog id="modal-product" v-model="dialog1" persistent max-width="1000">
       <template v-slot:activator="{ on, attrs }">
         <v-btn
           class="additem"
@@ -15,56 +10,73 @@
           dark
           v-bind="attrs"
           v-on="on"
-          width="200px"
+          width="250px"
         >
-          Open Dialog
+          我要發問
         </v-btn>
       </template>
-      <v-card>
-        <v-form ref="form">
-          <v-text-field
-            label="商品名稱"
-            v-model="form.name"
-            type="text"
-            required
-            placeholder="請輸入商品名稱"
-            :state="state.name"
-            outlined
-          >
-          </v-text-field>
-        </v-form>
+      <div class="container01">
+        <v-card>
+          <v-container>
+            <v-form ref="form">
+              <v-text-field
+                v-model="form.name"
+                type="text"
+                required
+                placeholder="請輸入討論主題"
+                :state="state.name"
+                outlined
+              >
+              </v-text-field>
+            </v-form>
 
-        <v-form ref="form">
-          <v-textarea
-            v-model="form.description"
-            :state="state.description"
-            required
-            rows="3"
-            max-rows="6"
-            placeholder="請輸入商品說明"
-            color="teal"
-          >
-          </v-textarea>
-        </v-form>
+            <v-form ref="form">
+              <v-text-field
+                v-model="form.user"
+                type="text"
+                required
+                placeholder="請輸入發問者姓名"
+                :state="state.name"
+                outlined
+              >
+              </v-text-field>
+            </v-form>
 
-        <v-card-actions>
-          <v-spacer></v-spacer>
-          <v-btn
-            color="green darken-1"
-            text
-            @click="submitModal"
-            :disabled="modalSubmitting"
-          >
-            送出
-          </v-btn>
-          <v-btn color="green darken-1" text @click="dialog1 = false">
-            取消
-          </v-btn>
-        </v-card-actions>
-      </v-card>
+            <v-form ref="form">
+              <v-textarea
+                class="mt-10"
+                v-model="form.description"
+                :state="state.description"
+                required
+                rows="3"
+                max-rows="6"
+                placeholder="請輸入商品說明"
+                color="teal"
+              >
+              </v-textarea>
+            </v-form>
+
+            <v-card-actions>
+              <v-spacer></v-spacer>
+              <v-btn
+                color="green darken-1"
+                text
+                @click="submitModal"
+                :disabled="modalSubmitting"
+              >
+                送出
+              </v-btn>
+              <v-btn color="green darken-1" text @click="dialog1 = false">
+                取消
+              </v-btn>
+            </v-card-actions>
+          </v-container>
+        </v-card>
+      </div>
     </v-dialog>
-   <!-- card -->
-   <!-- <v-btn align="left" class="flex " v-for="item in products2" :key="item._id" :value="item" @click="discussOpen(item)">
+
+    <!-- card -->
+    <!-- <v-btn align="left" class="flex " v-for="item in products2" :key="item._id" :value="item" @click="discussOpen(item)">
           <div class="border">
             <div class="row col-6 justify-between ">
 
@@ -79,67 +91,63 @@
           </div>
         </v-btn> -->
     <!-- table -->
-   <v-container mt-15>
-         <v-row>
-                <v-col
-                  cols="12"
-                  md="6"
-                  lg="3"
-                  xl="3"
-                  v-for="(item, index) in products2"
-                  :key="item._id"
-                >
+    <v-container mt-16>
+      <v-row>
+        <v-col
+          align="center"
+          justify="center"
+          cols="12"
+          md="6"
+          lg="3"
+          xl="3"
+          v-for="item in products2"
+          :key="item._id"
+        >
+          <v-card max-width="250">
+            <h1>主題:{{ item.name }}</h1>
+            <v-card-text> </v-card-text>
+            <v-card-text v-text="item.description"> </v-card-text>
+            <v-divider class="mx-4"></v-divider>
+            <v-card-actions>
+              <v-spacer></v-spacer>
+              <v-btn @click="discussopen(item)">cc </v-btn>
+            </v-card-actions>
+          </v-card>
+        </v-col>
+      </v-row>
 
-                  <v-card max-width="250">
-                    <h1>主題:{{ item.name}}</h1>
-                      <v-card-title >{{ item.name }}</v-card-title>
-                    <v-card-text v-text="products2[index].description"> </v-card-text>
-                    <v-divider class="mx-4"></v-divider>
-                    <v-card-actions>
-                      <v-spacer></v-spacer>
-                      <v-btn
-                        @click ="discussopen(item)">cc
-                      </v-btn>
-                    </v-card-actions>
-                  </v-card>
-                   <v-dialog
-                   max-width="900"
-                    v-model="discuss"
-                      >
-                      <v-card mt-10>
-                      <v-toolbar
-                          color="primary"
-                          dark
-                        > <h1>主題:{{ form.name }}</h1>
-                        </v-toolbar>
-                    <v-card-text>
-                     <p>描述:{{ form.description }}</p>
-                     <v-divider class="mx-4 my-4"></v-divider>
-                      <p>{{form.account}}:{{form.messages}}</p>
-                      <p>{{form.account1}}:{{form.messages1}}</p>
-                      <v-col>
-                         <v-card-text>
-                           <p>88888888888888888888888</p>
-                         </v-card-text>
-                         </v-col>
-                     </v-card-text>
+      <!-- 對話視窗 -->
+      <v-dialog max-width="900" v-model="discuss">
+        <v-card mt-10>
+          <v-container>
+            <v-toolbar color="primary" dark>
+              <h1>主題:{{ form.name }}</h1>
+              <p>{{ form.user }}</p>
+            </v-toolbar>
+            <v-card-text>
+              <v-card-text
+                ><h1 class="mt-5">描述:</h1>
+                {{ form.description }}</v-card-text
+              >
+              <v-divider class="mx-4 my-4"></v-divider>
+              <v-card-text v-for="mes in form.messages" :key="mes._D">
+                <p>{{ mes.account }}:{{ mes.text }}</p>
+                <p>{{ mes.date }}</p>
+                <p></p>
+              </v-card-text>
+            </v-card-text>
 
-                     <v-text-field
-                       v-model="text"
-                       outlined
-                       append-outer-icon="mdi-send"
-                       @click:append-outer="sendmessage()"
-                       >
-
-                     </v-text-field>
-                     </v-card>
-
-                       </v-dialog>
-
-                </v-col>
-
-              </v-row>
-              </v-container>
+            <v-text-field
+              v-model="text"
+              outlined
+              append-outer-icon="mdi-send"
+              @click:append-outer="sendmessage()"
+            >
+            </v-text-field>
+          </v-container>
+        </v-card>
+      </v-dialog>
+    </v-container>
 
     <!-- <v-simple-table>
     <template v-slot:default>
@@ -175,15 +183,18 @@
 export default {
   data () {
     return {
+      number: -1,
       sending: false,
       text: '',
       modalSubmitting: false,
       products2: [],
 
       form: {
+        user: '',
         name: '',
         description: '',
-        _id: ''
+        _id: '',
+        message: ''
       },
       // editProduct (index) {
       //   this.form = {
@@ -257,22 +268,26 @@ export default {
     async discussopen (item) {
       this.discuss = true
       this.form.name = item.name
-      this.form._id = item._id
+      this.form.user = this.form._id = item._id
       this.form.description = item.description
-      this.form.messages = item.messages[0].text
-      this.form.account = item.messages[0].account
-      this.form.messages1 = item.messages[1].text
-      this.form.account1 = item.messages[1].account
+      this.form.messages = item.messages
+      this.number = this.products2.indexOf(item)
     },
     async sendmessage () {
       try {
-        const { data } = await this.api.post('/board/' + this.form._id, { text: this.text, account: this.user.account }, {
-          headers: {
-            authorization: 'Bearer ' + this.user.token
+        const { data } = await this.api.post(
+          '/board/' + this.form._id,
+          { text: this.text, account: this.user.account },
+          {
+            headers: {
+              authorization: 'Bearer ' + this.user.token
+            }
           }
-        })
-        console.log(data)
-        this.discuss = false
+        )
+        this.products2[this.number].messages.push(
+          data.result.messages[data.result.messages.length - 1]
+        )
+        // this.discuss = false
       } catch (error) {
         console.log(error)
       }
@@ -304,14 +319,42 @@ export default {
   margin-top: 500px;
 }
 
+.container01 {
+  margin: auto;
+}
+
 .container {
   max-width: 1000px;
 }
 
 .additem {
   position: absolute;
-  left: 620px;
-  top: 25px;
+  left: 100px;
+  top: 120px;
   z-index: 22;
+  margin-right: 100px;
+}
+
+/* @media screen and (max-width: 500px) {
+  #section01 {
+    height: 1800px;
+    background-color: #dde0d9;
+  }
+} */
+@media screen and (max-width: 1700px) {
+  .additem {
+    position: relative;
+    left: 100px;
+    top: 50px;
+    z-index: 22;
+  }
+}
+
+@media screen and (max-width: 600px) {
+  .additem {
+    position: relative;
+    left: -2px;
+    margin: auto;
+  }
 }
 </style>

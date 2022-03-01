@@ -2,12 +2,15 @@
   <div id="section01">
     <v-row>
       <v-col cols="6" class="content1 mt-3" align="center" justify="center">
-          <iframe width="600" height="400"
+        <iframe
+          width="600"
+          height="400"
           src="https://www.youtube.com/embed/ByqsbaXgX3U"
           title="YouTube video player"
           frameborder="0"
           allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-          allowfullscreen></iframe>
+          allowfullscreen
+        ></iframe>
       </v-col>
       <v-col cols="6" class="worktext">
         <h1>訓練說明</h1>
@@ -18,21 +21,7 @@
       <v-col cols="6" align="center" justify="center">
         <v-btn to="/">回去訓練頁</v-btn>
       </v-col>
-        <v-form ref="form" >
-              <v-text-field
-               outlined
-                v-model.number="quantity"
-                type="number"
-                required
-                :state="quantityState"
-                min="0"
-              >
-              </v-text-field>
-              <v-btn class="mr-10" @click="addCart">加入訓練菜單</v-btn>
-              <v-btn @click="addCart" >回去訓練頁</v-btn>
-            </v-form>
     </v-row>
-
   </div>
 </template>
 <script>
@@ -83,7 +72,8 @@ export default {
 }
 </script>
 <style scoped>
-#section01{
-  margin-top:100px ;
+#section01 {
+  margin-top: 100px;
+  width: 90%;
 }
 </style>
