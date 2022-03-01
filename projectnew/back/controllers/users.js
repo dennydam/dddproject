@@ -35,6 +35,17 @@ export const login = async (req, res) => {
     res.status(500).send({ success: false, message: '伺服器錯誤' })
   }
 }
+
+export const logout = async (req, res) => {
+  try {
+    req.user.tokens = req.user.tokens.filter(token => token !== req.token)
+    await req.user.save()
+    res.status(200).send({ success: true, message: '' })
+  } catch (error) {
+    res.status(500).send({ success: false, message: '伺服器錯誤' })
+  }
+}
+
 export const getUsers = async (req, res) => {
   try {
     const result = await users.find({ _id: { $ne: req.user._id } }, 'account')

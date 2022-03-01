@@ -5,21 +5,41 @@ import router from '@/router'
 export const login2 = async ({ commit }, form2) => {
   try {
     const { data } = await api.post('/users/login', form2)
-    console.log('aaa')
     commit('login', data.result)
-    console.log('bbb')
     swal.fire({
       icon: 'success',
       title: '成功',
       text: '登入成功'
     })
-    router.push('/')
   } catch (error) {
     console.log(error)
     swal.fire({
       icon: 'error',
       title: '失敗',
       text: '登入失敗'
+    })
+  }
+}
+
+export const logout = async ({ commit, state }) => {
+  try {
+    await api.delete('/users/logout', {
+      headers: {
+        authorization: 'Bearer ' + state.token
+      }
+    })
+    commit('logout')
+    // router.push('/')
+    swal.fire({
+      icon: 'success',
+      title: '成功',
+      text: '登出成功'
+    })
+  } catch (error) {
+    swal.fire({
+      icon: 'error',
+      title: '失敗',
+      text: error.response.data.message
     })
   }
 }

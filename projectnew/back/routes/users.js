@@ -8,13 +8,15 @@ import {
   extend,
   addCart,
   getCart,
-  updateCart
+  updateCart,
+  logout
 } from '../controllers/users.js'
 
 const router = express.Router()
 
 router.post('/', register)
 router.post('/login', login)
+router.delete('/logout', auth, logout)
 router.post('/extend', auth, extend)
 router.get('/', auth, getUsers)
 router.get('/me', auth, getUserInfo)

@@ -6,6 +6,14 @@ export const login = (state, data) => {
   state.cart = data.cart
 }
 
+export const logout = (state, data) => {
+  state.token = ''
+  state.account = ''
+  state.role = 0
+  state.email = ''
+  state.cart = []
+}
+
 export const getInfo = (state, data) => {
   state.account = data.account
   state._id = data._id

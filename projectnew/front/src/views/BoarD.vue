@@ -31,18 +31,6 @@
             </v-form>
 
             <v-form ref="form">
-              <v-text-field
-                v-model="form.user"
-                type="text"
-                required
-                placeholder="請輸入發問者姓名"
-                :state="state.name"
-                outlined
-              >
-              </v-text-field>
-            </v-form>
-
-            <v-form ref="form">
               <v-textarea
                 class="mt-10"
                 v-model="form.description"
@@ -50,7 +38,7 @@
                 required
                 rows="3"
                 max-rows="6"
-                placeholder="請輸入商品說明"
+                placeholder="請描述問題"
                 color="teal"
               >
               </v-textarea>
@@ -103,12 +91,14 @@
           v-for="item in products2"
           :key="item._id"
         >
-          <v-card max-width="250">
+          <v-card class="discuss" max-width="250">
             <h1>主題:{{ item.name }}</h1>
             <v-card-text> </v-card-text>
-            <v-card-text v-text="item.description"> </v-card-text>
+            <v-card-text >{{item.description}} </v-card-text>
             <v-divider class="mx-4"></v-divider>
-            <v-card-actions>
+            <v-card-actions >
+              <v-icon>mdi-account</v-icon>
+              <p class="mt-4">{{user.account}}</p>
               <v-spacer></v-spacer>
               <v-btn @click="discussopen(item)">cc </v-btn>
             </v-card-actions>
@@ -122,18 +112,22 @@
           <v-container>
             <v-toolbar color="primary" dark>
               <h1>主題:{{ form.name }}</h1>
-              <p>{{ form.user }}</p>
             </v-toolbar>
             <v-card-text>
               <v-card-text
-                ><h1 class="mt-5">描述:</h1>
+                >描述:
                 {{ form.description }}</v-card-text
               >
               <v-divider class="mx-4 my-4"></v-divider>
-              <v-card-text v-for="mes in form.messages" :key="mes._D">
-                <p>{{ mes.account }}:{{ mes.text }}</p>
-                <p>{{ mes.date }}</p>
-                <p></p>
+              <v-card-text d-flex v-for="mes in form.messages" :key="mes._D">
+               <v-row class="d-flex" >
+                  <v-icon>mdi-account</v-icon>
+                <p class="my-5">{{ mes.account }}:{{ mes.text }}</p>
+                <v-spacer></v-spacer>
+                <p class="my-5">{{ mes.date }}</p>
+                </v-row>
+                 <v-divider class="mx-4 my-4"></v-divider>
+
               </v-card-text>
             </v-card-text>
 
@@ -248,6 +242,7 @@ export default {
               authorization: 'Bearer ' + this.user.token
             }
           })
+          console.log(data.result)
           this.products2.push(data.result)
           this.dialog1 = false
         }
@@ -333,6 +328,10 @@ export default {
   top: 120px;
   z-index: 22;
   margin-right: 100px;
+}
+
+.discuss{
+  border: 2px solid black;
 }
 
 /* @media screen and (max-width: 500px) {

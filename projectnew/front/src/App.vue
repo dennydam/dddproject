@@ -103,6 +103,9 @@
             <v-btn color="primary" dark v-bind="attrs" v-on="on">
               Log in
             </v-btn>
+             <v-btn color="primary"
+              @click="logout">
+            </v-btn>
           </template>
           <v-card color="primary">
             <v-form v-model="valid" @submit.prevent="login" ref="form2">
@@ -246,6 +249,7 @@ export default {
           title: '成功',
           text: '註冊成功'
         })
+        this.dialog = false
         this.$router.push('/')
       } catch (error) {
         console.log(error)
@@ -261,6 +265,10 @@ export default {
       if (!valid) return
       // console.log(this.form2);
       this.$store.dispatch('user/login2', this.form2)
+      this.dialog2 = false
+    },
+    logout () {
+      this.$store.dispatch('user/logout')
     },
     menuItems () {
       return this.menu
