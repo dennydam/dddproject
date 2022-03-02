@@ -58,7 +58,6 @@
                   <v-spacer></v-spacer>
                   <v-btn>
                     <router-link
-                      color="deep-purple lighten-2"
                       text
                       :to="'/product2/' + product._id"
                       >Start
@@ -70,7 +69,7 @@
           </v-row>
         </v-container>
       </div>
-      <div class="container01">
+      <div class="container02">
         <v-container fluid class="aaa">
           <h1>飲食清單</h1>
           <v-divider class="mx-4 my-4"></v-divider>
@@ -108,9 +107,9 @@
 
                 <v-card-actions>
                   <v-spacer></v-spacer>
-                  <v-btn>
+                  <v-btn  outlined color="#0D1E25">
                     <router-link
-                      color="deep-purple lighten-2"
+                      color="#0D1E25"
                       text
                       :to="'/product/' + product._id"
                       >Start

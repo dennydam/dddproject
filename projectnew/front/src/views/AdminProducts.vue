@@ -136,30 +136,16 @@
                       <v-col cols="12" sm="6" md="4">
                         <v-text-field
                           v-model="editedItem.price"
-                          label="price"
+                          label="熱量"
                         ></v-text-field>
                       </v-col>
-                      <v-col cols="12" sm="6" md="4">
-                        <v-text-field
-                          v-model="editedItem.price"
-                          label="Fat (g)"
-                        ></v-text-field>
-                      </v-col>
-                      <!-- <v-col>
-                     <img :src="item.image" style="width:100px">
-                    </v-col> -->
                       <v-col cols="12" sm="6" md="4">
                         <v-text-field
                           v-model="editedItem.image"
-                          label="Carbs (g)"
+                          label="image"
                         ></v-text-field>
                       </v-col>
-                      <v-col cols="12" sm="6" md="4">
-                        <v-text-field
-                          v-model="editedItem.protein"
-                          label="Protein (g)"
-                        ></v-text-field>
-                      </v-col>
+
                     </v-row>
                   </v-container>
                 </v-card-text>
@@ -193,10 +179,10 @@
           </v-toolbar>
         </template>
         <template v-slot:[`item.actions`]="{ item }">
-          <v-icon small class="mr-2" @click="editItem(item)">
+          <v-icon small   color="green darken-2" class="mr-2" @click="editItem(item)">
             mdi-pencil
           </v-icon>
-          <v-icon small @click="deleteItem(item)"> mdi-delete </v-icon>
+          <v-icon small   color="red" @click="deleteItem(item)"> mdi-delete  </v-icon>
         </template>
       </v-data-table>
     </v-container>
@@ -268,7 +254,7 @@ export default {
           value: 'name'
         },
         { text: 'Calories', value: 'price' },
-        { text: 'Carbs (g)', value: 'imag' },
+        { text: 'image', value: 'imag' },
         { text: 'Actions', value: 'actions', sortable: false }
       ],
       editedIndex: -1,
@@ -349,7 +335,6 @@ export default {
             ...this.form,
             image: data.result.image
           }
-          this.$refs.table.refresh()
         }
         this.modalSubmitting = false
         this.form = {
@@ -524,8 +509,8 @@ export default {
         ...this.form,
         image: data.result.image
       }
-      console.log('55')
-      this.$refs.table.refresh()
+
+      this.dialog = false
       this.close()
     }
   },

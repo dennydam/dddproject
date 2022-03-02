@@ -109,15 +109,10 @@
             >
               Log in
             </v-btn>
-<<<<<<< HEAD
             <v-btn color="primary" v-else @click="logout"
               >Log out</v-btn
             >
-=======
-             <v-btn color="primary"
-              @click="logout">
-            </v-btn>
->>>>>>> master
+
           </template>
           <v-card color="primary">
             <v-form v-model="valid" @submit.prevent="login" ref="form2">
@@ -196,9 +191,6 @@
 
         <v-divider></v-divider>
 
-        <v-card-text class="white--text">
-          {{ new Date().getFullYear() }} — <strong>Vuetify</strong>
-        </v-card-text>
       </v-card>
     </v-footer>
   </v-app>
@@ -225,7 +217,7 @@ export default {
       {
         index: '2',
         icon: 'info',
-        title: 'Tranning',
+        title: 'Let GO',
         submenu: [
           { itemIndex: '2-1', itemTitle: 'count', url: '/login' },
           { itemIndex: '2-1', itemTitle: 'Tranning', url: '/about' },

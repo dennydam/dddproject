@@ -178,10 +178,10 @@
           </v-toolbar>
         </template>
         <template v-slot:[`item.actions`]="{ item }">
-          <v-icon small class="mr-2" @click="editItem(item)">
+          <v-icon small  color="green darken-2" class="mr-2" @click="editItem(item)">
             mdi-pencil
           </v-icon>
-          <v-icon small @click="deleteItem(item)"> mdi-delete </v-icon>
+          <v-icon small  color="red" @click="deleteItem(item)"> mdi-delete </v-icon>
         </template>
       </v-data-table>
     </v-container>
@@ -501,8 +501,7 @@ export default {
         ...this.form,
         image: data.result.image
       }
-      console.log('55')
-      this.$refs.table.refresh()
+      this.dialog = false
       this.close()
     }
   },
