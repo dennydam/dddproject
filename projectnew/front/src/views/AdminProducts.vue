@@ -6,9 +6,7 @@
       id="modal-product"
       v-model="dialog1"
       persistent
-      @click="resetForm"
       max-width="600"
-      hide-overlay="false"
     >
       <template v-slot:activator="{ on, attrs }">
         <v-btn
@@ -26,11 +24,11 @@
         <v-container>
           <v-form ref="form">
             <v-text-field
-              label="商品名稱"
+              label="輸入飲食名稱"
               v-model="form.name"
               type="text"
               required
-              placeholder="請輸入商品名稱"
+              placeholder="請輸入飲食名稱"
               :state="state.name"
               outlined
             >
@@ -42,7 +40,7 @@
               type="number"
               min="0"
               required
-              placeholder="請輸入商品價格"
+              placeholder="請輸入食物熱量"
               :state="state.price"
               outlined
             >
@@ -56,7 +54,7 @@
               required
               rows="3"
               max-rows="6"
-              placeholder="請輸入商品說明"
+              placeholder="請輸入食物說明"
               color="teal"
             >
             </v-textarea>
@@ -200,9 +198,6 @@
           </v-icon>
           <v-icon small @click="deleteItem(item)"> mdi-delete </v-icon>
         </template>
-        <template v-slot:no-data>
-          <v-btn color="primary" @click="initialize"> Reset </v-btn>
-        </template>
       </v-data-table>
     </v-container>
     <!-- <v-simple-table>
@@ -315,10 +310,6 @@ export default {
     dialogDelete (val) {
       val || this.closeDelete()
     }
-  },
-
-  created1 () {
-    this.initialize()
   },
 
   methods: {

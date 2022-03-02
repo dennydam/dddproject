@@ -1,5 +1,5 @@
 <template>
-  <v-app>
+  <v-app id="app">
     <v-app-bar color="primary" dark app>
       <v-toolbar-title
         ><v-img src="./assets/logo.svg" width="180px" alt=""
@@ -100,12 +100,24 @@
       <div>
         <v-dialog v-model="dialog2" persistent max-width="350">
           <template v-slot:activator="{ on, attrs }">
-            <v-btn color="primary" dark v-bind="attrs" v-on="on">
+            <v-btn
+              color="primary"
+              v-if="!user.isLogin"
+              dark
+              v-bind="attrs"
+              v-on="on"
+            >
               Log in
             </v-btn>
+<<<<<<< HEAD
+            <v-btn color="primary" v-else @click="logout"
+              >Log out</v-btn
+            >
+=======
              <v-btn color="primary"
               @click="logout">
             </v-btn>
+>>>>>>> master
           </template>
           <v-card color="primary">
             <v-form v-model="valid" @submit.prevent="login" ref="form2">
@@ -157,7 +169,7 @@
 
       <router-view />
     </v-main>
-     <v-footer padless>
+    <v-footer padless>
       <v-card
         color="primary"
         flat
@@ -179,7 +191,7 @@
         </v-card-text>
 
         <v-card-text class="white--text pt-0">
-        Copyright © 2020  TAIWAN reserved.
+          Copyright © 2020 TAIWAN reserved.
         </v-card-text>
 
         <v-divider></v-divider>
